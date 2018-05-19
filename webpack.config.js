@@ -6,13 +6,16 @@ module.exports = {
   entry: {
      app:   './src/index.js',
   },
+  devtool: 'inline-source-map',
+  devServer: {
+     contentBase: './dist'
+   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
   output: {
     filename: '[name].bundle.js',    
     path: path.resolve(__dirname,'dist'),
-    publicPath: '/'
   },
   devtool: '#source-map',
   module: {

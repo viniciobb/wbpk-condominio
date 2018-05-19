@@ -47,6 +47,6 @@ var AuthorList = createReactClass({
 
 AuthorList.propTypes =  {
     authors: PropTypes.array.isRequired
-}, !!!! todo everywhere !!!!
+}, 
 
 module.exports = AuthorList;

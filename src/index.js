@@ -11,16 +11,24 @@
 
 
 "use strict";
-import 'jquery';
+//import 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-var React = require('react');
-var Router = require('react-router');
-var routes = require('./routes');
-var InitializeActions = require("./actions/initializeActions");
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import InitializeActions from './actions/initializeActions';
+import App from './components/app';
 
 InitializeActions.initApp();
 
-Router.run(routes, function(Handler){
-    React.render(<Handler/>, document.getElementById('app'));
-}); 
+render((
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+    
+) , document.getElementById('app'));
+
+// Router.run(routes, function(Handler){
+//     React.render(<Handler/>, document.getElementById('app'));
+// }); 

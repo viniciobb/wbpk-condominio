@@ -1,16 +1,19 @@
-"use strict";
-var React = require('react');
-var Router = require("react-router");
-var DefaultRoute = Router.DefaultRoute;
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var Redirect = Router.Redirect;
+import React from 'react';
+import Home from './homePage';
+import About from './about/aboutPage';
+import AuthorsPage from './authors/authorPage';
+import CondominiosPage from './condominios/condominiosPage';
+import { Switch, Route } from 'react-router-dom';
 
+const Main = () => (
+  <main>
+    <Switch>
+      <Route exact path='/' component={Home}/>
+      <Route exact path='/about' component={About}/>
+      <Route exact path='/authors' component={AuthorsPage}/>
+      <Route exact path='/condominios' component={CondominiosPage}/>
 
-var routes = (
-    <Route name="app" path="/" handler={require('./components/app')}>
-        <DefaultRoute handler={require('./components/homePage')}/>
-        {/* <Route name="authors" handler={require('./components/authors/authorPage')}/>
+      {/*<Route name="authors" handler={require('./components/authors/authorPage')}/>
         <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')}/>
         <Route name="addCondominio" path="condominio" handler={require('./components/condominios/manageCondominioPage')}/>
         <Route name="addEndereco" path="condominio/:idCondominio/endereco"  handler={require('./components/enderecos/manageEnderecoPage')}/>
@@ -25,8 +28,14 @@ var routes = (
         <Redirect from="about-us" to="about"/>
         <Redirect from="awthors" to="authors"/>
         <Redirect from="about*" to="about"/> */}
-    </Route>
-);
 
-module.exports = routes;
 
+    </Switch>
+  </main>
+)
+
+module.exports = Main; 
+
+/*
+
+*/
