@@ -1,19 +1,14 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Input = require("../common/textInput");
-var EnderecosPage = require("../enderecos/enderecosPage");
-var FacilitiesPage = require("../facilities/facilitiesPage");
-var CondominioForm = createReactClass({
-    
-    propTypes: {
-        condominio: React.PropTypes.object.isRequired,
-        onSave: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        errors: React.PropTypes.object
-    },
+import React from 'react';
+import PropTypes from 'prop-types';
+import Input from "../common/textInput";
+import EnderecosPage from "../enderecos/enderecosPage";
+import FacilitiesPage from "../facilities/facilitiesPage";
+
+
+class CondominioForm extends React.Component{
         
-    render: function(){
+    render(){
         return ( 
             <div className="container">
                 <form>
@@ -78,6 +73,13 @@ var CondominioForm = createReactClass({
         ); 
     }
 
-});
+};
+
+CondominioForm.propTypes={
+        condominio: PropTypes.object.isRequired,
+        onSave: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
+        errors: PropTypes.object
+}
 
 module.exports = CondominioForm;  

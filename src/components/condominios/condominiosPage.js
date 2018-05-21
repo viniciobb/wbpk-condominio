@@ -11,27 +11,40 @@ class CondominiosPage extends React.Component {
     //         condominios: CondominioStore.getAllCondominios()
     //     };
     // },
+
+    constructor(props) {
+        super(props);
+        this.state.condominios = CondominioStore.getAllCondominios();
+        this._onChange = this._onChange.bind(this);
+    }
     
-    // componentWillMount : function(){
-    //     CondominioStore.addChangeListener(this._onChange);
-    // },
-    // componentWillUnmount : function(){
-    //     CondominioStore.removeChangeListener(this._onChange);
-    // },
+    componentWillMount (){
+        CondominioStore.addChangeListener(this._onChange);
+    }
     
-    // _onChange : function(){
-    //     console.log("onChange condominioPage");
-    //     this.setState({ condominios: CondominioStore.getAllCondominios() });
-    // },
+    componentWillUnmount (){
+        CondominioStore.removeChangeListener(this._onChange);
+    }
+    
+    _onChange(){
+         
+         this.setState(function(prevState, props){
+            return {
+                condominios:  CondominioStore.getAllCondominios() 
+            };            
+         });
+    }
+
+    
     
     render(){
         
         return (
             <div className="container">
                <h1 className="page-header">Condomínios</h1>
-               <Link to="addCondominio" className="btn btn-default">Adicionar Condomínio</Link>
+               {/* <Link to="/addCondominio" className="btn btn-default">Adicionar Condomínio</Link>
                <CondominioList 
-                    condominios={this.state.condominios}/>   
+                    condominios={this.state.condominios}/>    */}
             </div>    
         );
     }

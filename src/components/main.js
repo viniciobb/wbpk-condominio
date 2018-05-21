@@ -1,6 +1,9 @@
 import React from 'react';
 import Home from './homePage';
 import About from './about/aboutPage';
+import ManageCondominioPage from './condominios/manageCondominioPage';
+import CondominiosPage from './condominios/condominiosPage';
+
 // import CondominiosPage from './condominios/condominiosPage';
 import NotFoundPage from './notFoundPage';
 import { Switch, Route } from 'react-router-dom';
@@ -10,6 +13,8 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={Home}/>
       <Route exact path='/about' component={About}/>
+      <Route exact path="/addCondominio" component={ManageCondominioPage}/>
+      <Route exact path="/condominios" component={CondominiosPage}/>
       <Route component={NotFoundPage}/>
     </Switch>
   </main>

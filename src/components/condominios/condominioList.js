@@ -1,23 +1,30 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var Link = Router.Link;
-var CondominioActions = require("../../actions/condominioActions");
-var Toastr = require("toastr");
+import React from 'react';
+import CondominioActions from '../../actions/condominioActions';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Toastr from 'toastr';
 
-var CondominioList = createReactClass({
-    propTypes: {
-        condominios: React.PropTypes.array.isRequired
-    },
+//
+//var Router = require('react-router');
+//var Link = Router.Link;
+//var CondominioActions = require("../../actions/condominioActions");
+//var Toastr = require("toastr");
+class CondominioList extends React.Component {
 
-    deleteCondominio: function(id, event){
+    // constructor(props) {
+    //     super(props);
+    //     this.state.condominios = CondominioStore.getAllCondominios();
+    //     this.deleteCondominio = this.deleteCondominio.bind(this);
+    // }
+
+    deleteCondominio(id, event){
         event.preventDefault();
         CondominioActions.deleteCondominio(id);
         Toastr.success("Condominio Deleted");
-    },
+    }
     
-    render: function(){
+    render(){
         
         var createCondominioRow = function(condominio){
             console.log("Rendering createCondominioRow");
@@ -46,6 +53,10 @@ var CondominioList = createReactClass({
             </div>    
         );
     }
-});
+};
+
+CondominioList.propTypes= {
+    condominios: PropTypes.array.isRequired
+}
 
 module.exports = CondominioList;
