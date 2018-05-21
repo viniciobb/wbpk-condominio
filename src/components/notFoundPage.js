@@ -1,18 +1,17 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Link = require('react-router').Link;
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-var NotFoundPage = createReactClass({
-    render: function(){
+class NotFoundPage extends React.Component{
+    render(){
         return (
             <div>
                 <h1>Page not found</h1>
                 <p>Whoops! Sorry, there is nothing to see here.</p>
-                <p><Link to="app">Back to Home</Link></p>
+                <p><Link to="/">Back to Home</Link></p>
             </div>    
         );
     }
-});
+};
 
 module.exports = NotFoundPage; 

@@ -1,29 +1,10 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var DropDown = require("../common/dropDown");
-var About = createReactClass({
-    statics: {
-        willTransitionTo: function(transition, params, query, callback){
-            if(!confirm('Are you sure you read a page that\'s this boring ?')){
-                transition.about();
+import React from 'react';
+import DropDown from "../common/dropDown";
 
-            }else{
-                
-                callback();
-            }
-
-        },
-
-        willTransitionFrom: function(transition, component){
-            if(!confirm('Are you sure you lead a page that\'s so exciting ??')){
-                transition.about();
-            }    
-        }
-
-    },
+class About extends React.Component{
     
-    render: function(){
+    render(){
         return (
 
             <div>
@@ -47,6 +28,6 @@ var About = createReactClass({
         );
     }
 
-});
+};
 
 module.exports = About; 

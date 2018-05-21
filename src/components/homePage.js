@@ -1,20 +1,18 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-//var Router = require('react-router');
-//var Link = Router.Link;
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-var Home = createReactClass({
-    render: function(){
+class Home extends React.Component{
+    render(){
         return (
             <div className="jumbotron">
                 <h1>HeyCondominium Administration</h1>                
                 <p> Reserve e controle.</p>
-                {/* < Link to="about" className="btn btn-primary btn-lg">Learn more</Link> */}
+                <li><Link to="/about">Learn more</Link></li>
             </div>
         );
     }
 
-});
+};
 
 module.exports = Home; 

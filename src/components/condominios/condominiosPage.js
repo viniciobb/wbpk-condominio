@@ -1,35 +1,30 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var Link = require('react-router').Link;
-var CondominioStore = require("../../stores/condominioStore");
-var CondominioList = require("./condominioList");
+import React from 'react';
+import CondominioStore from '../../stores/condominioStore';
+//var Link = require('react-router').Link;
+import CondominioList from './condominioList';
 
-var CondominiosPage = createReactClass({
+class CondominiosPage extends React.Component {
     
-    getInitialState: function(){
-        
-        
-
-        return {
-            condominios: CondominioStore.getAllCondominios()
-        };
-    },
+    // getInitialState: function(){
+    //     return {
+    //         condominios: CondominioStore.getAllCondominios()
+    //     };
+    // },
     
-    componentWillMount : function(){
-        CondominioStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount : function(){
-        CondominioStore.removeChangeListener(this._onChange);
-    },
+    // componentWillMount : function(){
+    //     CondominioStore.addChangeListener(this._onChange);
+    // },
+    // componentWillUnmount : function(){
+    //     CondominioStore.removeChangeListener(this._onChange);
+    // },
     
-    _onChange : function(){
-        console.log("onChange condominioPage");
-        this.setState({ condominios: CondominioStore.getAllCondominios() });
-    },
+    // _onChange : function(){
+    //     console.log("onChange condominioPage");
+    //     this.setState({ condominios: CondominioStore.getAllCondominios() });
+    // },
     
-    render: function(){
+    render(){
         
         return (
             <div className="container">
@@ -40,6 +35,6 @@ var CondominiosPage = createReactClass({
             </div>    
         );
     }
-});
+};
 
 module.exports = CondominiosPage;
