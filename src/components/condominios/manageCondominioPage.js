@@ -1,48 +1,20 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var CondominioForm = require('./condominioForm');
-var CondominioStore = require("../../stores/condominioStore");
-var EnderecoStore = require("../../stores/enderecoStore");
-var FacilityStore = require("../../stores/facilityStore");
-var CondominioActions = require("../../actions/condominioActions");
-var EnderecoActions = require("../../actions/enderecoActions");
-var FacilityActions = require("../../actions/facilityActions");
+import React from 'react';
+import CondominioForm from './condominioForm';
+import CondominioStore from "../../stores/condominioStore";
+import EnderecoStore from "../../stores/enderecoStore";
+import FacilityStore from "../../stores/facilityStore";
+import CondominioActions from "../../actions/condominioActions";
+import EnderecoActions from "../../actions/enderecoActions";
+import FacilityActions from "../../actions/facilityActions";
+import Toastr from "toastr";
 
-var Toastr = require("toastr");
+class ManageCondominioPage extends React.Component {
 
-var ManageCondominioPage = createReactClass({
-    mixins: [
-        Router.Navigation
-    ],
-
-    statics: {
-
-        willTransitionFrom: function(transition, component){
-            if( component.state.dirty){
-               
-                CondominioActions.saveStateCondominio(component.state.condominio);    
-            }    
-        }
-
-    },
-    
-     componentWillUnmount : function(){
-
-     },
-    
-    // _onChange : function(){
-    //     console.log("onChange EnderecoStore");
-    //     this.state.condominio.enderecos = EnderecoStore.getEnderecos();
-    //     this.setState({ condominio: this.state.condominio });
-    // },
-
-    getInitialState: function(){
-        console.log("getInitialState managerCondominio");
-        return {
+    constructor(props) {
+        super(props);
+        this.setState({
             condominio: {
-    
                 nome: '',
                 cnpj: 0,
                 quantidadeApartamentos: 0,
@@ -56,10 +28,19 @@ var ManageCondominioPage = createReactClass({
             },
             errors: {},
             dirty: false
-        };
-    },
+        });
 
-    componentWillMount: function(){
+        this.setCondominioState = this.setCondominioState.bind(this);
+        this.condominioFormIsValid = this.condominioFormIsValid.bind(this);
+        this.getEnderecos = this.getEnderecos.bind(this);
+        this.getFacilities = this.getFacilities.bind(this);
+        this.saveCondominio = this.saveCondominio.bind(this);
+        
+        
+        
+    }
+
+    componentWillMount(){
        
         //EnderecoStore.addChangeListener(this._onChange);
 
@@ -95,17 +76,18 @@ var ManageCondominioPage = createReactClass({
 
         }
        
-    },
+    }
 
-     setCondominioState: function(event){ // called for every key press
+    setCondominioState(event){ // called for every key press
         var field = event.target.name;
         var value = event.target.value;
         this.state.condominio[field] = value;
         
         this.setState({ dirty: true });
         return this.setState({ condominio: this.state.condominio});
-    },
-    condominioFormIsValid: function(){
+    }
+    
+    condominioFormIsValid(){
         var formIsValid = true;
         this.state.errors = {}; // clear any previous errors
         if(this.state.condominio.nome.length < 1){
@@ -121,21 +103,21 @@ var ManageCondominioPage = createReactClass({
         this.setState({errors: this.state.errors});
         return formIsValid;
 
-    },
+    }
 
-    getEnderecos: function(){
+    getEnderecos(){
        
         return  CondominioStore.getEnderecosCondominio(this.props.params.id);
 
-    },
+    }
 
-    getFacilities: function(){
+    getFacilities(){
        
         return  CondominioStore.getFacilitiesCondominio(this.props.params.id);
 
-    },
+    }
 
-    saveCondominio: function(event){
+    saveCondominio(event){
         event.preventDefault();
         if(!this.condominioFormIsValid()){
             return;
@@ -163,15 +145,9 @@ var ManageCondominioPage = createReactClass({
         
         this.transitionTo('condominios');
 
-    },
-
+    }
     
-
-    /**
-     * creating reusable inputs
-     * 
-     */
-    render: function(){
+    render(){
         return (
             <CondominioForm 
              condominio={this.state.condominio} 
@@ -183,6 +159,6 @@ var ManageCondominioPage = createReactClass({
         ); 
     }
 
-});
+};
 
 module.exports = ManageCondominioPage; 

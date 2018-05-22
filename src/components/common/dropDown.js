@@ -1,9 +1,9 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var DropDown = createReactClass({
 
-    render: function(){
+import React from 'react';
+class DropDown extends React.Component{
+
+    render(){
         
         return (
             <div className="dropdown">
@@ -23,6 +23,5 @@ var DropDown = createReactClass({
         ); 
     }
 
-});
-
+};
 module.exports = DropDown; 

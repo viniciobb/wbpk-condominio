@@ -1,9 +1,7 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var TextInput = createReactClass({
-
-    render: function(){
+import React from 'react';
+class TextInput extends React.Component{
+    render(){
         
         var wrapperClass = 'form-group';
         if(this.props.error && this.props.error.length > 0){
@@ -28,6 +26,6 @@ var TextInput = createReactClass({
         ); 
     }
 
-});
+};
 
 module.exports = TextInput; 

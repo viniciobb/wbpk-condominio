@@ -1,28 +1,16 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var EnderecoForm = require('./enderecoForm');
-var EnderecoStore = require("../../stores/enderecoStore");
-var EnderecoActions = require("../../actions/enderecoActions");
+import React from 'react';
+import EnderecoForm from './enderecoForm';
+import EnderecoStore from "../../stores/enderecoStore";
+import EnderecoActions from "../../actions/enderecoActions";
+import Toastr from "toastr";
 
-var Toastr = require("toastr");
-
-var ManageEnderecoPage = createReactClass({
-
+class ManageEnderecoPage extends React.Component {
     
-    componentWillUnmount : function(){
-        EnderecoStore.removeChangeListener(this._onChange);
-    },
     
-    _onChange : function(){
-        
-        this.setState({ endereco: EnderecoStore.getEndereco()});
-    },
-
-    getInitialState: function(){
-        console.log("getInitialState ManageEnderecoPage");
-        return {
+    constructor(props) {
+        super(props);
+        this.setState({
             endereco: {
                 logradouro: '',
                 numero: 0,
@@ -37,34 +25,41 @@ var ManageEnderecoPage = createReactClass({
             },
             errors: {},
             dirty: false
-        };
-    },
+        });
 
-    buscaEndereco: function(){
+        this._onChange = this._onChange.bind(this);
+        this.buscaEndereco = this.buscaEndereco.bind(this);
+        this.saveEndereco = this.saveEndereco.bind(this);
+        this.setEnderecoState = this.setEnderecoState.bind(this);
+        this.enderecoFormIsValid = this.enderecoFormIsValid.bind(this);
+    }
+    
+    componentWillUnmount(){
+        EnderecoStore.removeChangeListener(this._onChange);
+    }
+    
+    _onChange(){
+        this.setState({ endereco: EnderecoStore.getEndereco()});
+    }
+
+    buscaEndereco(){
         event.preventDefault();
         EnderecoActions.buscaEndereco(this.state.endereco.cep);
-    },
+    }
 
-    mixins: [
-        Router.Navigation
-    ],
+    // statics: {
 
-    statics: {
+    //     willTransitionFrom: function(transition, component){
+    //         if( component.state.dirty && !confirm("Leave without saving ?")){
+    //             transition.abort();
+    //         }    
+    //     }
 
-        willTransitionFrom: function(transition, component){
-            if( component.state.dirty && !confirm("Leave without saving ?")){
-                transition.abort();
-            }    
-        }
+    // },
 
-    },
-
-    componentWillMount: function(){
+    componentWillMount(){
         
         EnderecoStore.addChangeListener(this._onChange);
-       
-        
-        
 
         if(this.props.params.idEndereco){
             
@@ -72,9 +67,9 @@ var ManageEnderecoPage = createReactClass({
 
         }
 
-    },
+    }
         
-    setEnderecoState: function(event){ // called for every key press
+    setEnderecoState(event){ // called for every key press
         var field = event.target.name;
         var value = event.target.value;
         
@@ -92,9 +87,9 @@ var ManageEnderecoPage = createReactClass({
         console.log("typed : " + value);
         this.setState({ dirty: true });
         return this.state.endereco;
-    },
+    }
     
-    saveEndereco: function(event){ 
+    saveEndereco(event){ 
         event.preventDefault();
         if(!this.enderecoFormIsValid()){
             return;
@@ -125,10 +120,9 @@ var ManageEnderecoPage = createReactClass({
 
         }    
 
-    },
+    }
 
-
-    enderecoFormIsValid: function(){
+    enderecoFormIsValid(){
         var formIsValid = true;
         this.state.errors = {}; // clear any previous errors
         if(this.state.endereco.logradouro.length < 1){
@@ -144,14 +138,14 @@ var ManageEnderecoPage = createReactClass({
         this.setState({errors: this.state.errors});
         return formIsValid;
 
-    },
+    }
 
     
     /**
      * creating reusable inputs
      * 
      */
-    render: function(){
+    render(){
         return (
             <EnderecoForm 
              endereco={this.state.endereco} 
@@ -162,6 +156,6 @@ var ManageEnderecoPage = createReactClass({
         ); 
     }
 
-});
+};
 
 module.exports = ManageEnderecoPage; 

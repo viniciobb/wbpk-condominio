@@ -42,9 +42,9 @@ class CondominiosPage extends React.Component {
         return (
             <div className="container">
                <h1 className="page-header">Condomínios</h1>
-               {/* <Link to="/addCondominio" className="btn btn-default">Adicionar Condomínio</Link>
+               <Link to="/addCondominio" className="btn btn-default">Adicionar Condomínio</Link>
                <CondominioList 
-                    condominios={this.state.condominios}/>    */}
+                    condominios={this.state.condominios}/>    
             </div>    
         );
     }

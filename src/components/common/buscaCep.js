@@ -1,17 +1,10 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var BuscaCep = createReactClass({
+import React from 'react';
+import PropTypes from 'prop-types';
 
-    propTypes: {
-        onBusca:  React.PropTypes.func.isRequired,
-        error:    React.PropTypes.object,
-        onChange: React.PropTypes.func.isRequired
-    },
-
-
-    
-    render: function(){
+class BuscaCep extends React.Component{
+   
+    render(){
         
         var wrapperClass = 'form-inline';
         if(this.props.error && this.props.error.length > 0){
@@ -38,6 +31,12 @@ var BuscaCep = createReactClass({
         ); 
     }
 
-});
+};
+
+BuscaCep.propTypes= {
+    onBusca:  PropTypes.func.isRequired,
+    error:    PropTypes.object,
+    onChange: PropTypes.func.isRequired
+}
 
 module.exports = BuscaCep; 

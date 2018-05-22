@@ -1,9 +1,9 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var RadioButton = createReactClass({
+import React from 'react';
 
-    render: function(){
+class RadioButton extends React.Component{
+
+    render(){
         
         var wrapperClass = 'form-group';
         if(this.props.error && this.props.error.length > 0){
@@ -50,6 +50,6 @@ var RadioButton = createReactClass({
         ); 
     }
 
-});
+};
 
 module.exports = RadioButton; 

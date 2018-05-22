@@ -1,28 +1,22 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var Link = require('react-router').Link;
-var EnderecoList = require("./enderecoList");
-var EnderecoStore = require("../../stores/enderecoStore");
-var EnderecoActions = require("../../actions/enderecoActions");
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import EnderecoList from './enderecoList';
+import EnderecoStore from '../../stores/enderecoStore';
+import EnderecoActions from "../../actions/enderecoActions";
 
+class EnderecosPage extends React.Component{
 
-var EnderecosPage = createReactClass({
+    // statics: {
 
-    propTypes: {
-        getEnderecos: React.PropTypes.func.isRequired
-    },
+    //     willTransitionFrom: function(transition, component){
+    //         // if( component.state.dirty && !confirm("Leave without saving ?")){
+    //         //     transition.abort();
+    //         // }    
+    //     }
 
-    statics: {
-
-        willTransitionFrom: function(transition, component){
-            // if( component.state.dirty && !confirm("Leave without saving ?")){
-            //     transition.abort();
-            // }    
-        }
-
-    },
+    // },
     
     getInitialState: function(){
 
@@ -97,7 +91,7 @@ var EnderecosPage = createReactClass({
         return showAddEnderecos;
     },
 
-    render: function(){
+    render(){
         
         return (
             <div className="container">
@@ -110,6 +104,10 @@ var EnderecosPage = createReactClass({
             </div>    
         );
     }
-});
+};
+
+EnderecosPage.propTypes= {
+    getEnderecos: PropTypes.func.isRequired
+}
 
 module.exports = EnderecosPage;
