@@ -1,27 +1,20 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var Link = Router.Link;
-var FacilityStore = require("../../stores/facilityStore");
-var FacilityActions = require("../../actions/facilityActions");
-var Toastr = require("toastr");
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import FacilityStore from "../../stores/facilityStore";
+import FacilityActions from "../../actions/facilityActions";
+import Toastr from "toastr";
 
-var FacilitiesList = createReactClass({
+class FacilitiesList extends React.Component {
     
-    //<td><Link to="manageEndereco" params={{idCondominio: this.props.idCondominio, idEndereco: endereco.id }}>{endereco.logradouro}</Link></td>
-    
-    propTypes: {
-        facilities: React.PropTypes.array.isRequired
-    },
-
-     deleteFacility: function(facility, event){
+     deleteFacility(facility, event){
          event.preventDefault();
          FacilityActions.deleteFacility(facility);
          Toastr.success("facility Deleted" + facility.nomefacility);
-     },
+     }
 
-    render: function(){
+    render(){
         
         var createFacilityRow = function(facility, index){
             
@@ -52,6 +45,10 @@ var FacilitiesList = createReactClass({
             </div>    
         );
     }
-});
+};
+
+FacilitiesList.propTypes={
+    facilities: PropTypes.array.isRequired
+}
 
 module.exports = FacilitiesList;

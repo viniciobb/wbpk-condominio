@@ -25,6 +25,9 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 
     getAllCondominios: function(){
         
+        console.log("all condominios");
+        console.dir(_condominios);
+        
         return _condominios;        
     },
 
@@ -97,7 +100,10 @@ Dispatcher.register(function(action){
         // this is the part that varies...
         
         case  ActionTypes.INITIALIZE_CONDOMINIO:
-            _condominios = action.initialData.condominios;
+            console.log("CondominioStore INITIALIZE_CONDOMINIO");
+            console.dir(action.initialData.condominios);
+            if(action.initialData.condominios)
+                _condominios = action.initialData.condominios;
             CondominioStore.emitChange();
             break;
         

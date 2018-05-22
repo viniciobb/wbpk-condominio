@@ -3,24 +3,13 @@ import React from 'react';
 import FacilityForm from './facilityForm';
 import FacilityStore from "../../stores/facilityStore";
 import FacilityActions from "../../actions/facilityActions";
+import Toastr from "toastr";
 
-var Toastr = require("toastr");
-
-var ManageFacilitiesPage = createReactClass({
-
-    
-     componentWillUnmount : function(){
-        FacilityStore.removeChangeListener(this._onChange);
-     },
-    
-    _onChange : function(){
-        console.log("onChange facilityPage");
-        this.setState({ facility: FacilityStore.getFacility()});
-    },
-
-    getInitialState: function(){
-        console.log("getInitialState ManageFacilityPage");
-        return {
+class ManageFacilitiesPage extends React.Component {
+   
+    constructor(props) {
+        super(props);
+        this.setState({
             facility: {
                 nomefacility: '',
                 tempoReserva: '',
@@ -33,26 +22,22 @@ var ManageFacilitiesPage = createReactClass({
             },
             errors: {},
             dirty: false
-        };
-    },
+        });
 
+        this._onChange = this._onChange.bind(this);
+        
+    } 
     
+    componentWillUnmount(){
+        FacilityStore.removeChangeListener(this._onChange);
+     }
+    
+    _onChange(){
+        console.log("onChange facilityPage");
+        this.setState({ facility: FacilityStore.getFacility()});
+    }
 
-    mixins: [
-        Router.Navigation
-    ],
-
-    statics: {
-
-        willTransitionFrom: function(transition, component){
-            if( component.state.dirty && !confirm("Leave without saving ?")){
-                transition.abort();
-            }    
-        }
-
-    },
-
-    componentWillMount: function(){
+    componentWillMount(){
         
         FacilityStore.addChangeListener(this._onChange);
        
@@ -69,15 +54,15 @@ var ManageFacilitiesPage = createReactClass({
         console.log("this.state.facility");
         console.dir(this.state.facility);
 
-    },
+    }
 
-    getTempoReserva: function(){
+    getTempoReserva(){
 
         return ["Dia", "Hora" ];
 
-    },
+    }
         
-    setFacilityState: function(event){ // called for every key press
+    setFacilityState(event){ // called for every key press
         var field = event.target.name;
         var value = event.target.value;
         
@@ -95,9 +80,9 @@ var ManageFacilitiesPage = createReactClass({
         console.log("typed : " + value);
         this.setState({ dirty: true });
         return this.state.facility;
-    },
+    }
     
-    saveFacility: function(event){ 
+    saveFacility(event){ 
         event.preventDefault();
         if(!this.facilityFormIsValid()){
             return;
@@ -132,10 +117,9 @@ var ManageFacilitiesPage = createReactClass({
 
         }    
 
-    },
+    }
 
-
-    facilityFormIsValid: function(){
+    facilityFormIsValid(){
         var formIsValid = true;
         this.state.errors = {}; // clear any previous errors
         if(this.state.facility.nomefacility.length < 1){
@@ -153,7 +137,7 @@ var ManageFacilitiesPage = createReactClass({
      * creating reusable inputs
      * 
      */
-    render: function(){
+    render(){
         return (
             <FacilityForm 
              facility={this.state.facility} 
@@ -165,6 +149,6 @@ var ManageFacilitiesPage = createReactClass({
         ); 
     }
 
-});
+};
 
 module.exports = ManageFacilitiesPage; 

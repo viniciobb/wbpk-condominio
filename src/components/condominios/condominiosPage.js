@@ -1,21 +1,34 @@
 "use strict";
 import React from 'react';
 import CondominioStore from '../../stores/condominioStore';
-//var Link = require('react-router').Link;
+import { Link } from 'react-router-dom';
 import CondominioList from './condominioList';
 
 class CondominiosPage extends React.Component {
-    
-    // getInitialState: function(){
-    //     return {
-    //         condominios: CondominioStore.getAllCondominios()
-    //     };
-    // },
 
     constructor(props) {
         super(props);
-        this.state.condominios = CondominioStore.getAllCondominios();
+        
+        console.log("CondominiosPage constructor");
+
+        this.state = {
+            condominios: []
+        };
+        // this.setState({
+        //     condominios: CondominioStore.getAllCondominios()
+        // });
+
         this._onChange = this._onChange.bind(this);
+    }
+
+    componentDidMount(){
+
+        console.log("CondominiosPage componentDidMount");
+        
+        this.setState({
+            condominios: CondominioStore.getAllCondominios()
+        });
+
     }
     
     componentWillMount (){
@@ -35,8 +48,6 @@ class CondominiosPage extends React.Component {
          });
     }
 
-    
-    
     render(){
         
         return (

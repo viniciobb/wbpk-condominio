@@ -1,20 +1,15 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Input = require("../common/textInput");
-var DropDown = require("../common/dropDown");
-var RadioButton = require("../common/radio");
-var TextAreaInput = require("../common/textAreaInput");
-var FacilityForm = createReactClass({
-    
-    propTypes: {
-        facility: React.PropTypes.object.isRequired,
-        onSave: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        errors: React.PropTypes.object
-    },
+import React from 'react';
+import PropTypes from 'prop-types';
+import Input from "../common/textInput";
+import DropDown from "../common/dropDown";
+import RadioButton from "../common/radio";
+import TextAreaInput from "../common/textAreaInput";
+
+
+class FacilityForm extends React.Component {    
         
-    render: function(){
+    render(){
         return (
            
            <form className="container">
@@ -86,6 +81,13 @@ var FacilityForm = createReactClass({
         ); 
     }
 
-});
+};
+
+FacilityForm.propTypes={
+    facility: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    errors: PropTypes.object
+}
 
 module.exports = FacilityForm;  

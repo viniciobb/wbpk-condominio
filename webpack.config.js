@@ -48,3 +48,5 @@ module.exports = {
   }
   
 }
+
+// https://github.com/mschwarzmueller/reactjs-css-animation-basics/blob/01-css-transitions/src/index.html

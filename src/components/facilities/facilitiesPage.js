@@ -1,30 +1,20 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var Link = require('react-router').Link;
-var FacilitiesList = require("./facilitiesList");
-var FacilityStore = require("../../stores/facilityStore");
-var FacilityActions = require("../../actions/facilityActions");
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import FacilitiesList from "./facilitiesList";
+import FacilityStore from "../../stores/facilityStore";
+import FacilityActions from "../../actions/facilityActions";
 
 
-var FacilitiesPage = createReactClass({
+class FacilitiesPage extends React.Component {
 
-     propTypes: {
-         getFacilities: React.PropTypes.func.isRequired
-     },
-
-    statics: {
-
-        willTransitionFrom: function(transition, component){
-            // if( component.state.dirty && !confirm("Leave without saving ?")){
-            //     transition.abort();
-            // }    
-        }
-
-    },
-    
-    getInitialState: function(){
+    constructor(props) {
+        super(props);
+        this.setState(getInitialState());
+    } 
+   
+    getInitialState(){
 
         var facilities = [];
 
@@ -64,44 +54,21 @@ var FacilitiesPage = createReactClass({
         return {
             facilities
         };
-    },
+    }
     
-    componentWillMount : function(){
+    componentWillMount(){
         FacilityStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount : function(){
+    }
+    componentWillUnmount(){
         FacilityStore.removeChangeListener(this._onChange);
-    },
+    }
     
-    _onChange : function(){
+    _onChange(){
         console.log("onChange facilityPage");
         this.setState({ facilities: FacilityStore.getFacilities()});
-    },
-    
-    // qtdeEnderecos : function(){
-        
-    //     var labelEndereco = "Endereços"
-    //     if(this.props.qtdeEndereco == 1){
-    //         labelEndereco = "Endereço"
-    //     }
-    //     return labelEndereco;
+    }
 
-    // },
-
-    // showAddFacility : function(){
-        
-    //     var showAddEnderecos = true; 
-    //     console.log("showAddEnderecos");
-    //     console.log(this.state.enderecos.length);
-    //     console.log(this.props.qtdeEndereco);
-    //     if(this.state.enderecos.length >= this.props.qtdeEndereco){
-    //         showAddEnderecos = false;
-    //     }
-
-    //     return showAddEnderecos;
-    // },
-
-    render: function(){
+    render(){
         
         return (
             <div className="container">
@@ -114,6 +81,10 @@ var FacilitiesPage = createReactClass({
             </div>    
         );
     }
-});
+};
+
+FacilitiesPage.propTypes= {
+    getFacilities: PropTypes.func.isRequired
+}
 
 module.exports = FacilitiesPage;
