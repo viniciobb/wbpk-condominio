@@ -1,10 +1,8 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Router = require('react-router');
-var FacilityForm = require('./facilityForm');
- var FacilityStore = require("../../stores/facilityStore");
- var FacilityActions = require("../../actions/facilityActions");
+import React from 'react';
+import FacilityForm from './facilityForm';
+import FacilityStore from "../../stores/facilityStore";
+import FacilityActions from "../../actions/facilityActions";
 
 var Toastr = require("toastr");
 

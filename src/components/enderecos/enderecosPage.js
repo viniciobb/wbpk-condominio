@@ -8,23 +8,9 @@ import EnderecoActions from "../../actions/enderecoActions";
 
 class EnderecosPage extends React.Component{
 
-    // statics: {
-
-    //     willTransitionFrom: function(transition, component){
-    //         // if( component.state.dirty && !confirm("Leave without saving ?")){
-    //         //     transition.abort();
-    //         // }    
-    //     }
-
-    // },
-    
-    getInitialState: function(){
-
+    constructor(props) {
+        super(props);
         var enderecos = [];
-
-        console.log(this.props.idCondominio); 
-
-        
 
         if(this.props.idCondominio){
             
@@ -53,24 +39,25 @@ class EnderecosPage extends React.Component{
 
         }
 
-        return {
-            enderecos
-        };
-    },
+        this._onChange = this._onChange.bind(this);
+        this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
+        this.showAddEnderecos = this.showAddEnderecos.bind(this);
+    }
     
-    componentWillMount : function(){
+    componentWillMount(){
         EnderecoStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount : function(){
-        EnderecoStore.removeChangeListener(this._onChange);
-    },
+    }
     
-    _onChange : function(){
+    componentWillUnmount(){
+        EnderecoStore.removeChangeListener(this._onChange);
+    }
+    
+    _onChange(){
         console.log("onChange enderecoPage");
         this.setState({ enderecos: EnderecoStore.getEnderecos()});
-    },
+    }
     
-    qtdeEnderecos : function(){
+    qtdeEnderecos(){
         
         var labelEndereco = "Endereços"
         if(this.props.qtdeEndereco == 1){
@@ -78,9 +65,9 @@ class EnderecosPage extends React.Component{
         }
         return labelEndereco;
 
-    },
+    }
 
-    showAddEnderecos : function(){
+    showAddEnderecos(){
         
         var showAddEnderecos = true; 
         
@@ -89,7 +76,7 @@ class EnderecosPage extends React.Component{
         }
 
         return showAddEnderecos;
-    },
+    }
 
     render(){
         

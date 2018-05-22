@@ -1,19 +1,11 @@
 "use strict";
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Input = require("../common/textInput");
-var BuscaCep = require("../common/buscaCep");
-var EnderecoForm = createReactClass({
-    
-    propTypes: {
-        endereco: React.PropTypes.object.isRequired,
-        onSave: React.PropTypes.func.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        onBusca: React.PropTypes.func.isRequired,
-        errors: React.PropTypes.object
-    },
-        
-    render: function(){
+import React from 'react';
+import Input from "../common/textInput";
+import BuscaCep from "../common/buscaCep";
+
+class EnderecoForm extends React.Component{
+
+    render(){
         return (
            
            <form className="container">
@@ -83,6 +75,14 @@ var EnderecoForm = createReactClass({
         ); 
     }
 
-});
+};
+
+EnderecoForm.propTypes= {
+    endereco: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onBusca: PropTypes.func.isRequired,
+    errors: PropTypes.object
+}
 
 module.exports = EnderecoForm;  
