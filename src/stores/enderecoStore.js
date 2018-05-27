@@ -53,11 +53,17 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
 });
 
 Dispatcher.register(function(action){
+    
+    console.dir(action);
+
+    if(!action.actionType) return;
+    
     switch(action.actionType){
         // this is the part that varies...
 
         
         case ActionTypes.CLEAN_ENDERECO:
+            console.dir(_endereco);
             _enderecos = [];
             _initialized = false;
             _endereco = {};
@@ -99,6 +105,7 @@ Dispatcher.register(function(action){
             
             
             _endereco = enderecoModel;
+            console.dir(_endereco);
             _saved_state = true;
             EnderecoStore.emitChange();
             break;  

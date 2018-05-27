@@ -8,7 +8,7 @@ class Home extends React.Component{
             <div className="jumbotron">
                 <h1>HeyCondominium Administration</h1>                
                 <p> Reserve e controle.</p>
-                <li><Link to="/about">Learn more</Link></li>
+                <li><Link to="/about/">Learn more</Link></li>
             </div>
         );
     }

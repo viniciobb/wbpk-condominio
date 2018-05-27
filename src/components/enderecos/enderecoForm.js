@@ -1,5 +1,6 @@
 "use strict";
 import React from 'react';
+import PropTypes from 'prop-types';
 import Input from "../common/textInput";
 import BuscaCep from "../common/buscaCep";
 

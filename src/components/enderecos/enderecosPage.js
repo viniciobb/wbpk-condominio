@@ -10,7 +10,18 @@ class EnderecosPage extends React.Component{
 
     constructor(props) {
         super(props);
-        var enderecos = [];
+        this.state = {
+            enderecos : []
+        }; 
+
+        this._onChange = this._onChange.bind(this);
+        this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
+        this.showAddEnderecos = this.showAddEnderecos.bind(this);
+    }
+
+    componentDidMount(){
+
+        var enderecos = {};
 
         if(this.props.idCondominio){
             
@@ -32,16 +43,20 @@ class EnderecosPage extends React.Component{
                 enderecos = EnderecoStore.getEnderecos();
 
             }else{
-
+                console.log("clean");
                 EnderecoActions.cleanEndereco();
 
             }
 
         }
 
-        this._onChange = this._onChange.bind(this);
-        this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
-        this.showAddEnderecos = this.showAddEnderecos.bind(this);
+        console.dir(enderecos);
+
+        this.setState({
+            enderecos : enderecos             
+        });
+
+        
     }
     
     componentWillMount(){
@@ -53,8 +68,12 @@ class EnderecosPage extends React.Component{
     }
     
     _onChange(){
-        console.log("onChange enderecoPage");
-        this.setState({ enderecos: EnderecoStore.getEnderecos()});
+         
+        this.setState(function(prevState, props){
+            return {
+                enderecos:  EnderecoStore.getEnderecos() 
+            };            
+        });
     }
     
     qtdeEnderecos(){

@@ -11,16 +11,22 @@ class FacilitiesPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.setState(getInitialState());
-    } 
-   
-    getInitialState(){
+        this.state = {
+            facilities : []
+        };
 
-        var facilities = [];
-
-        console.log(this.props.idCondominio); 
-
+        this._onChange = this._onChange.bind(this);
         
+    } 
+    
+    componentWillMount(){
+        FacilityStore.addChangeListener(this._onChange);
+    }
+    componentWillUnmount(){
+        FacilityStore.removeChangeListener(this._onChange);
+    }
+
+    componentDidMount(){
 
         if(this.props.idCondominio){
             
@@ -49,23 +55,16 @@ class FacilitiesPage extends React.Component {
         }
 
         console.log("facilities in facility page");
-        console.dir(facilities);
-
-        return {
-            facilities
-        };
-    }
-    
-    componentWillMount(){
-        FacilityStore.addChangeListener(this._onChange);
-    }
-    componentWillUnmount(){
-        FacilityStore.removeChangeListener(this._onChange);
+        console.dir(this.state.facilities);
     }
     
     _onChange(){
         console.log("onChange facilityPage");
-        this.setState({ facilities: FacilityStore.getFacilities()});
+        this.setState(function(prevState, props){
+            return {
+                facilities:  FacilityStore.getFacilities() 
+            };            
+        });
     }
 
     render(){

@@ -9,7 +9,7 @@ class ManageFacilitiesPage extends React.Component {
    
     constructor(props) {
         super(props);
-        this.setState({
+        this.state= {
             facility: {
                 nomefacility: '',
                 tempoReserva: '',
@@ -22,7 +22,7 @@ class ManageFacilitiesPage extends React.Component {
             },
             errors: {},
             dirty: false
-        });
+        };
 
         this._onChange = this._onChange.bind(this);
         
@@ -42,11 +42,11 @@ class ManageFacilitiesPage extends React.Component {
         FacilityStore.addChangeListener(this._onChange);
        
         console.log("componentWillMount managerFacility");
-        console.log(this.props.params.idCondominio);
-        console.log(this.props.params.idFacility);
+        console.log(this.props.match.params.idCondominio);
+        console.log(this.props.match.params.idFacility);
         
 
-        if(this.props.params.idFacility){
+        if(this.props.match.params.idFacility){
             
           this.setState({facility: FacilityStore.getFacilityById(this.props.params.idFacility)});
 

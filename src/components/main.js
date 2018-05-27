@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './homePage';
 import About from './about/aboutPage';
 import ManageCondominioPage from './condominios/manageCondominioPage';
+import manageEnderecoPage from './enderecos/manageEnderecoPage';
 import CondominiosPage from './condominios/condominiosPage';
 
 // import CondominiosPage from './condominios/condominiosPage';
@@ -13,7 +14,9 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={Home}/>
       <Route exact path='/about' component={About}/>
-      <Route exact path="/addCondominio" component={ManageCondominioPage}/>
+      <Route exact path="/condominio/:id" component={ManageCondominioPage}/>
+      <Route exact path="/condominio" component={ManageCondominioPage}/>
+      <Route path="/addEndereco" component={manageEnderecoPage}/>
       <Route exact path="/condominios" component={CondominiosPage}/>
       <Route component={NotFoundPage}/>
     </Switch>
@@ -24,7 +27,7 @@ module.exports = Main;
 
 /*
 {/*<Route name="authors" handler={require('./components/authors/authorPage')}/>
-        <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')}/>
+        
         <Route name="addCondominio" path="condominio" handler={require('./components/condominios/manageCondominioPage')}/>
         <Route name="addEndereco" path="condominio/:idCondominio/endereco"  handler={require('./components/enderecos/manageEnderecoPage')}/>
         <Route name="addFacility" path="condominio/:idCondominio/facility"  handler={require('./components/facilities/manageFacilitiesPage')}/>

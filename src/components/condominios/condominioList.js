@@ -32,7 +32,11 @@ class CondominioList extends React.Component {
             return (
                 <tr key={condominio.id}>
                     <td><a href="#" onClick={this.deleteCondominio.bind(this, condominio.id)}>Delete</a></td>
-                    <td><Link to="manageCondominio" params={{id: condominio.id}}>{condominio.nome}</Link></td>
+                    <td>
+                        <Link to={"codominio/"+condominio.id}>{
+                            condominio.nome}
+                        </Link>
+                    </td>
                     <td>{condominio.cnpj}</td>
                 </tr>
             );

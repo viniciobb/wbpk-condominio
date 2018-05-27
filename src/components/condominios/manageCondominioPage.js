@@ -13,7 +13,7 @@ class ManageCondominioPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             condominio: {
                 nome: '',
                 cnpj: 0,
@@ -28,7 +28,9 @@ class ManageCondominioPage extends React.Component {
             },
             errors: {},
             dirty: false
-        });
+        };
+
+        console.dir(this.state.condominio);
 
         this.setCondominioState = this.setCondominioState.bind(this);
         this.condominioFormIsValid = this.condominioFormIsValid.bind(this);
@@ -45,15 +47,15 @@ class ManageCondominioPage extends React.Component {
         //EnderecoStore.addChangeListener(this._onChange);
 
         console.log("componentWillMount managerCondominio");
+
+        console.dir(this.state.condominio);
        
-        var condominioId = this.props.params.id; // from the path /condominio/:id
-        
-        
+        var condominioId = this.props.match.params.id; // from the path /condominio/:id
 
         if(condominioId && condominioId != '0' ){
-           
-
+            
             this.setState({condominio: CondominioStore.getCondominioById(condominioId)});
+
         }else{
 
             var condominioState = CondominioStore.getStateCondominio();
@@ -136,7 +138,12 @@ class ManageCondominioPage extends React.Component {
             console.log("saveCondominio");
         }
 
+        console.log("clean");
+        
         EnderecoActions.cleanEndereco();
+        
+        console.log("clean");
+        
         FacilityActions.cleanFacility();
         
         this.setState({ dirty: false });

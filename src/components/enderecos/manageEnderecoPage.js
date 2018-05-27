@@ -10,7 +10,7 @@ class ManageEnderecoPage extends React.Component {
     
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             endereco: {
                 logradouro: '',
                 numero: 0,
@@ -25,7 +25,7 @@ class ManageEnderecoPage extends React.Component {
             },
             errors: {},
             dirty: false
-        });
+        };
 
         this._onChange = this._onChange.bind(this);
         this.buscaEndereco = this.buscaEndereco.bind(this);
@@ -39,6 +39,7 @@ class ManageEnderecoPage extends React.Component {
     }
     
     _onChange(){
+        console.log("onChange");
         this.setState({ endereco: EnderecoStore.getEndereco()});
     }
 
@@ -61,9 +62,9 @@ class ManageEnderecoPage extends React.Component {
         
         EnderecoStore.addChangeListener(this._onChange);
 
-        if(this.props.params.idEndereco){
+        if(this.props.match.params.idEndereco){
             
-          this.setState({endereco: EnderecoStore.getEnderecoById(this.props.params.idEndereco)});
+          this.setState({endereco: EnderecoStore.getEnderecoById(this.props.match.params.idEndereco)});
 
         }
 
@@ -97,9 +98,9 @@ class ManageEnderecoPage extends React.Component {
         
         console.dir(this.state.endereco);
 
-        if(this.props.params.idEndereco){
+        if(this.props.match.params.idEndereco){
 
-            EnderecoActions.updateEndereco(this.state.endereco, this.props.params.idEndereco);
+            EnderecoActions.updateEndereco(this.state.endereco, this.props.match.params.idEndereco);
 
         }else{
 
@@ -108,15 +109,17 @@ class ManageEnderecoPage extends React.Component {
         }
                
         
-        console.log(this.props.params.idCondominio);
+        console.log(this.props.match.params.idCondominio);
         
-        if(this.props.params.idCondominio)
+        if(this.props.match.params.idCondominio)
             
-            this.transitionTo('manageCondominio', {id: this.props.params.idCondominio});
+            this.props.history.push("/condominio/"+this.props.match.params.idCondominio);
+
+            //this.transitionTo('manageCondominio', {id: this.props.params.match.idCondominio});
             
         else{
             
-            this.transitionTo('addCondominio');
+            this.props.history.push("/condominio");
 
         }    
 

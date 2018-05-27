@@ -1,8 +1,8 @@
 "use strict"
-var Dispatcher = require("../dispatcher/appDispatcher");
-var ActionTypes = require("../constants/actionTypes");
-var EventEmitter = require("events").EventEmitter;
-var assign = require("object-assign");
+import Dispatcher from "../dispatcher/appDispatcher";
+import ActionTypes from "../constants/actionTypes";
+import { EventEmitter }  from "events";
+import  assign from "object-assign";
 var _ = require("lodash");
 var CHANGE_EVENT = "change";
 
@@ -96,13 +96,15 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 });
 
 Dispatcher.register(function(action){
+    console.dir(action);
+    if(!action.actionType) return;
+    
     switch(action.actionType){
         // this is the part that varies...
         
         case  ActionTypes.INITIALIZE_CONDOMINIO:
             console.log("CondominioStore INITIALIZE_CONDOMINIO");
-            console.dir(action.initialData.condominios);
-            if(action.initialData.condominios)
+            if(action.initialData && action.initialData.condominios)
                 _condominios = action.initialData.condominios;
             CondominioStore.emitChange();
             break;
