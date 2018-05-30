@@ -10,6 +10,7 @@ class ManageEnderecoPage extends React.Component {
     
     constructor(props) {
         super(props);
+        console.log("ManageEnderecoPage constructor");
         this.state = {
             endereco: {
                 logradouro: '',
@@ -63,8 +64,12 @@ class ManageEnderecoPage extends React.Component {
         EnderecoStore.addChangeListener(this._onChange);
 
         if(this.props.match.params.idEndereco){
-            
-          this.setState({endereco: EnderecoStore.getEnderecoById(this.props.match.params.idEndereco)});
+          
+            console.log("id endereco") ;
+            console.log(this.props.match.params.idEndereco);
+            console.dir(EnderecoStore.getEnderecoById(this.props.match.params.idEndereco));
+            this.state.endereco = EnderecoStore.getEnderecoById(this.props.match.params.idEndereco);
+            console.dir(this.state.endereco);
 
         }
 
@@ -92,6 +97,9 @@ class ManageEnderecoPage extends React.Component {
     
     saveEndereco(event){ 
         event.preventDefault();
+        
+        console.dir(this.state.endereco);
+
         if(!this.enderecoFormIsValid()){
             return;
         }

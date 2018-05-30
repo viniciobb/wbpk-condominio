@@ -41,8 +41,12 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
     },
 
     getEnderecoById: function(id){
-        
-        return _enderecos[id];
+
+        console.log(id);
+        console.dir(_enderecos);
+        var endereco = _.find(_enderecos, {_id : id});
+        console.dir(endereco);     
+        return endereco;
     },
 
     getInitialized: function(){
@@ -58,6 +62,8 @@ Dispatcher.register(function(action){
 
     if(!action.actionType) return;
     
+    console.dir(action.enderecos);
+
     switch(action.actionType){
         // this is the part that varies...
 
@@ -73,7 +79,9 @@ Dispatcher.register(function(action){
             break;
         
         case ActionTypes.INIT_ENDERECO:
-            _enderecos = action.enderecos;
+            if(action.enderecos.length > 0 )
+                _enderecos = action.enderecos;
+
             _initialized = true;
             _endereco = {};
             _saved_state = false;
@@ -81,6 +89,8 @@ Dispatcher.register(function(action){
             break;
         
         case ActionTypes.CREATE_ENDERECO:
+            console.log(typeof(_enderecos));
+            console.dir(_enderecos);
             _enderecos.push(action.endereco);
             console.log("_enderecos in endereco Store");
             console.dir(_enderecos);

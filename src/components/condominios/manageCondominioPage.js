@@ -13,6 +13,7 @@ class ManageCondominioPage extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log("ManageCondominioPage constructor");
         this.state = {
             condominio: {
                 nome: '',
@@ -55,6 +56,7 @@ class ManageCondominioPage extends React.Component {
         if(condominioId && condominioId != '0' ){
             
             this.setState({condominio: CondominioStore.getCondominioById(condominioId)});
+            
 
         }else{
 
@@ -107,15 +109,21 @@ class ManageCondominioPage extends React.Component {
 
     }
 
-    getEnderecos(){
+    getEnderecos(){   
        
-        return  CondominioStore.getEnderecosCondominio(this.props.params.id);
+        console.log("get enderecos");
+
+        console.log(this.props.match.params.id);
+        
+        console.dir(CondominioStore.getEnderecosCondominio(this.props.match.params.id));
+
+        return  CondominioStore.getEnderecosCondominio(this.props.match.params.id); 
 
     }
 
     getFacilities(){
        
-        return  CondominioStore.getFacilitiesCondominio(this.props.params.id);
+        return  CondominioStore.getFacilitiesCondominio(this.props.match.params.id);
 
     }
 
@@ -150,7 +158,19 @@ class ManageCondominioPage extends React.Component {
         
         Toastr.success('Condominio saved.');
         
-        this.transitionTo('condominios');
+        //this.transitionTo('condominios');
+
+        // if(this.props.match.params.idCondominio)
+            
+        //     this.props.history.push("/condominio/"+this.props.match.params.idCondominio);
+
+        //     //this.transitionTo('manageCondominio', {id: this.props.params.match.idCondominio});
+            
+        // else{
+            
+            this.props.history.push("/condominios");
+
+        //}   
 
     }
     

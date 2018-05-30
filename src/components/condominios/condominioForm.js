@@ -62,10 +62,10 @@ class CondominioForm extends React.Component{
                         qtdeEndereco={1}
                     />
 
-                    <FacilitiesPage
+                    {/* <FacilitiesPage
                         idCondominio={this.props.condominio.id}
                         getFacilities={this.props.getFacilities}
-                    />
+                    /> */}
 
                     <input type="submit" value="Save" onClick={this.props.onSave} className="btn btn-default"/>
                 </form>               

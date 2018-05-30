@@ -1,31 +1,44 @@
-"use strict";
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CondominioStore from "../../stores/condominioStore";
 import EnderecoStore from "../../stores/enderecoStore";
 import EnderecoActions from "../../actions/enderecoActions";
 import Toastr from "toastr";
 
 class EnderecoList extends React.Component{
 
-    deleteEndereco(endereco, event){
+     constructor(props) {
+         super(props);
+
+         console.log("EnderecoList constructor");
+
+       this.state = {
+           enderecos: this.props.enderecos
+       };
+
+       this.deleteEndereco =  this.deleteEndereco.bind(this);
+
+     }
+
+    deleteEndereco(endereco, event){ 
         event.preventDefault();
         EnderecoActions.deleteEndereco(endereco);
         Toastr.success("Endereco Deleted" + endereco.logradouro);
     }
 
     render(){
-        
+
         var createEnderecoRow = function(endereco, index){
             
-            var idEndereco = ( endereco.id ? endereco.id : index);
+            console.log(endereco._id);
+            
+            var idEndereco = ( endereco._id ? endereco._id : index);
             
             return (
                 
                 <tr>
                     <td><a href="#" onClick={this.deleteEndereco.bind(this, endereco)}>Delete</a></td>
-                    <td><Link to="manageEndereco" params={{ idCondominio: this.props.idCondominio, idEndereco: idEndereco }}>{endereco.logradouro}</Link></td>
+                    <td><Link to={"/condominio/" + this.props.idCondominio +"/endereco/" + endereco._id }>{endereco.logradouro}</Link></td>
                     <td>{endereco.numero}</td>
                     <td>{endereco.bairro}</td>
                     <td>{endereco.cep}</td>
@@ -44,7 +57,7 @@ class EnderecoList extends React.Component{
                     <th>CEP</th>
                 </thead>    
                 <tbody>
-                    {this.props.enderecos.map(createEnderecoRow, this)}
+                    {this.state.enderecos.map(createEnderecoRow, this)}
                 </tbody>
                 </table>    
             </div>    
@@ -54,7 +67,7 @@ class EnderecoList extends React.Component{
 
 EnderecoList.propTypes= {
     enderecos: PropTypes.array.isRequired
-}
+};
 
 
 module.exports = EnderecoList;

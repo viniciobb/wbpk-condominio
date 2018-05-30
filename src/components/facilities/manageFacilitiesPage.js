@@ -48,7 +48,7 @@ class ManageFacilitiesPage extends React.Component {
 
         if(this.props.match.params.idFacility){
             
-          this.setState({facility: FacilityStore.getFacilityById(this.props.params.idFacility)});
+          this.setState({facility: FacilityStore.getFacilityById(this.props.match.params.idFacility)});
 
         }
         console.log("this.state.facility");
@@ -93,7 +93,7 @@ class ManageFacilitiesPage extends React.Component {
 
         if(this.props.params.idFacility){
 
-            FacilityActions.updateFacility(this.state.facility, this.props.params.idFacility);
+            FacilityActions.updateFacility(this.state.facility, this.props.match.params.idFacility);
 
         }else{
 
@@ -102,18 +102,19 @@ class ManageFacilitiesPage extends React.Component {
         }
                
         
-        console.log(this.props.params.idCondominio);
-        console.log(typeof(this.props.params.idCondominio));
+        //console.log(this.props.params.idCondominio);
+        //console.log(typeof(this.props.params.idCondominio));
         
-        if(this.props.params.idCondominio !== '0' || this.props.params.idCondominio !== 0)
+        if(this.props.match.params.idCondominio !== '0' || this.props.match.params.idCondominio !== 0)
             
-            this.transitionTo('manageCondominio', {id: this.props.params.idCondominio});
+            this.transitionTo('manageCondominio', {id: this.props.match.params.idCondominio});
             
         else{
             
             console.log("******* iḿ going to addFacility");
             
-            this.transitionTo('addFacility');
+            //this.transitionTo('addFacility');
+            this.props.history.push("/addFacility");
 
         }    
 

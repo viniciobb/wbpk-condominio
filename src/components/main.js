@@ -16,7 +16,8 @@ const Main = () => (
       <Route exact path='/about' component={About}/>
       <Route exact path="/condominio/:id" component={ManageCondominioPage}/>
       <Route exact path="/condominio" component={ManageCondominioPage}/>
-      <Route path="/addEndereco" component={manageEnderecoPage}/>
+      <Route path="/condominio/:idCondominio/endereco/:idEndereco" component={manageEnderecoPage}/>
+      <Route path="/condominio/:idCondominio/endereco" component={manageEnderecoPage}/>
       <Route exact path="/condominios" component={CondominiosPage}/>
       <Route component={NotFoundPage}/>
     </Switch>
