@@ -32,6 +32,7 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
 
     getEndereco: function(){
         
+        console.dir(_endereco);
         return _endereco;
     },
 

@@ -52,9 +52,10 @@ class EnderecosPage extends React.Component{
             }else{
                 console.log("inicialized");
                 
-                this.setState({
-                    enderecos: EnderecoStore.getEnderecos()
-                });
+                //this.setState({
+                    //enderecos: EnderecoStore.getEnderecos()
+                    this.state.enderecos = this.props.getEnderecos();
+                //});
 
             }
 
@@ -67,11 +68,12 @@ class EnderecosPage extends React.Component{
 
             if(EnderecoStore.getSavedState()){
                 
-                this.setState({
-                    enderecos: EnderecoStore.getEnderecos()
-                });
+                //this.setState({
+                    //enderecos: EnderecoStore.getEnderecos()
+                    this.state.enderecos = EnderecoStore.getEndereco();
+                //});
                 
-                console.dir(enderecos);
+                console.dir(endereco);
 
             }else{
                 console.log("clean");
