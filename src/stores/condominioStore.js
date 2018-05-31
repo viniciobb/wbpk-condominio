@@ -7,7 +7,7 @@ var _ = require("lodash");
 var CHANGE_EVENT = "change";
 
 var _condominios = []; // outside the export module
-var _condominio = {};
+var _condominio= {};
 var _saved_state = false;
 
 // take an empty object, take the emitEmitter.prototype and 
@@ -58,6 +58,7 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
             return false;            
         }
     },
+   
     
     getEnderecosCondominio: function(condominioId){
         
@@ -111,6 +112,8 @@ Dispatcher.register(function(action){
         
         case ActionTypes.CREATE_CONDOMINIO:
             _condominios.push(action.condominio);
+            console.log("_condominios");
+            console.dir(_condominios);
             _condominio = {};
             _saved_state = false;
             CondominioStore.emitChange();

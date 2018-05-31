@@ -5,10 +5,7 @@ var actionTypes = require("../constants/actionTypes");
 
 var CondominioActions = {
 
-
-    
-
-    createCondominio: function(condominio){
+    createCondominio: function(condominio, callback){
        
         CondominioApi.saveCondominio(condominio).then(function(newCondominio){
 
@@ -16,6 +13,8 @@ var CondominioActions = {
                 actionType: actionTypes.CREATE_CONDOMINIO,
                 condominio: newCondominio
             });
+
+            callback();
 
         });
     },
@@ -34,26 +33,28 @@ var CondominioActions = {
         
     },
 
-    updateCondominio: function(condominio){
+    updateCondominio: function(condominio, callback){
         CondominioApi.updateCondominio(condominio).then(function(updatedCondominio){
             Dispatcher.dispatch({
                 actionType: actionTypes.UPDATE_CONDOMINIO,
                 condominio: updatedCondominio
             });
 
+            callback();
+
         });
         
     },
 
-    deleteCondominio: function(id){
+    deleteCondominio: function(id, callback){
         
         CondominioApi.deleteCondominio(id).then(function(response){
-
             Dispatcher.dispatch({
                 actionType: actionTypes.DELETE_CONDOMINIO,
                 id: response.id
             });
 
+            callback();
         });
         
     }

@@ -56,11 +56,11 @@ class CondominioForm extends React.Component{
                         error={this.props.errors.quantidadeVagas}
                     />
 
-                    <EnderecosPage
+                    {/* <EnderecosPage
                         idCondominio={this.props.condominio.id}
                         getEnderecos={this.props.getEnderecos}
                         qtdeEndereco={1}
-                    />
+                    /> */}
 
                     {/* <FacilitiesPage
                         idCondominio={this.props.condominio.id}

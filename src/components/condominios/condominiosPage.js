@@ -31,21 +31,23 @@ class CondominiosPage extends React.Component {
 
     }
     
-    componentWillMount (){
-        CondominioStore.addChangeListener(this._onChange);
+     componentWillMount (){
+         CondominioStore.addChangeListener(this._onChange);
     }
     
     componentWillUnmount (){
-        CondominioStore.removeChangeListener(this._onChange);
+         CondominioStore.removeChangeListener(this._onChange);
     }
     
     _onChange(){
-         
-         this.setState(function(prevState, props){
+        
+        console.log("on_change CondominiosPage")
+
+        this.setState(function(prevState, props){
             return {
                 condominios:  CondominioStore.getAllCondominios() 
             };            
-         });
+        });
     }
 
     render(){

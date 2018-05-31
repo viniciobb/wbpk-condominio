@@ -12,16 +12,22 @@ import Toastr from 'toastr';
 //var Toastr = require("toastr");
 class CondominioList extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state.condominios = CondominioStore.getAllCondominios();
-    //     this.deleteCondominio = this.deleteCondominio.bind(this);
-    // }
+    constructor(props) {
+         super(props);
+         this.afterDeleting = this.afterDeleting.bind(this);
+         this.deleteCondominio = this.deleteCondominio.bind(this);
+    }
+
+    afterDeleting(){
+        Toastr.success("Condominio Deleted");
+        //this.props.history.push("/condominios");
+    }
+    
 
     deleteCondominio(id, event){
         event.preventDefault();
-        CondominioActions.deleteCondominio(id);
-        Toastr.success("Condominio Deleted");
+        CondominioActions.deleteCondominio(id, this.afterDeleting);
+        
     }
     
     render(){

@@ -10,21 +10,21 @@ class About extends React.Component{
         this.state = {
              lista: [
 
-            //     {
-            //         nome : "jose",
-            //         idade : 20
+                {
+                    nome : "jose",
+                    idade : 20
 
-            //     },
-            //     {
-            //         nome : "joao",
-            //         idade : 30
+                },
+                {
+                    nome : "joao",
+                    idade : 30
 
-            //     },
-            //     {
-            //         nome : "jacu",
-            //         idade : 35
+                },
+                {
+                    nome : "jacu",
+                    idade : 35
 
-            //     }
+                }
 
 
             ]
