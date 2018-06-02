@@ -26,6 +26,13 @@ var EnderecoActions = {
         
     },
 
+    clickNewEndereco: function(){
+
+        Dispatcher.dispatch({
+            actionType: actionTypes.CLICK_NEW_ENDERECO
+        });
+    },
+
     createEndereco: function(endereco){
 
         Dispatcher.dispatch({

@@ -57,9 +57,8 @@ class CondominioForm extends React.Component{
                     />
 
                      <EnderecosPage
-                        idCondominio={this.props.condominio.id}
-                        enderecos={this.props.condominio.enderecos}
                         qtdeEndereco={1}
+                        history={this.props.history} 
                     />
 
                     {/* <FacilitiesPage

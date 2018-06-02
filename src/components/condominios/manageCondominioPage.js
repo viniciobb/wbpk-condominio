@@ -19,22 +19,7 @@ class ManageCondominioPage extends React.Component {
         this.state = this.getStateFromStores();
         this.state.errors= {};
         this.state.dirty= false;
-
-        // this.state = {
-        //     condominio: {
-        //         nome: '',
-        //         cnpj: 0,
-        //         quantidadeApartamentos: 0,
-        //         quantidadeBlocos: 0,
-        //         quantidadeElevadores: 0,
-        //         quantidadeVagas: 0,
-        //         id: 0,
-        //         enderecos: [],
-        //         facilities: []
-        //     },
-        //     errors: {},
-        //     dirty: false
-        // };
+       
         console.log(this.state);
         
         this.setCondominioState = this.setCondominioState.bind(this);
@@ -172,6 +157,7 @@ class ManageCondominioPage extends React.Component {
             <CondominioForm 
              condominio={this.state.condominio} 
              onChange={this.setCondominioState}
+             history={this.props.history}
              onSave={this.saveCondominio}
              errors={this.state.errors} />
         ); 

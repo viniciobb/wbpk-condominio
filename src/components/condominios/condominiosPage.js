@@ -26,6 +26,7 @@ class CondominiosPage extends React.Component {
     _onClick(){
         event.preventDefault();
         CondominioActions.clickNewCondominio();
+        console.dir(this.props.history);
         this.props.history.push("/condominio");
     }
 

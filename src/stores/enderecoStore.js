@@ -1,6 +1,7 @@
 "use strict"
 var Dispatcher = require("../dispatcher/appDispatcher");
 var ActionTypes = require("../constants/actionTypes");
+var CondominioStore = require("./condominioStore");
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 var _ = require("lodash");
@@ -65,6 +66,7 @@ Dispatcher.register(function(action){
     switch(action.actionType){
         
         case ActionTypes.CLICK_CONDOMINIO:
+            Dispatcher.waitFor([CondominioStore.dispatchToken]);
             console.log("CLICK_CONDOMINIO");
             console.dir(action.condominio);
             _enderecos = action.condominio.enderecos;
@@ -81,6 +83,12 @@ Dispatcher.register(function(action){
             _initialized = false;
             _saved_state = false;
 
+        break;
+
+        case ActionTypes.CLICK_NEW_ENDERECO:
+            console.log("_NEW_ENDERECO");
+            _endereco = {};
+            _saved_state = false;
         break;
 
         case ActionTypes.CLEAN_ENDERECO:

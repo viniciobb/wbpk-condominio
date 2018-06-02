@@ -13,113 +13,42 @@ class EnderecosPage extends React.Component{
         
         console.log("EnderecosPage constructor");
 
-        this.state = {
-            enderecos : []
-        }; 
+        this.state = this.getStateFromStores(); 
+        console.log(this.state.enderecos);
 
-        this._onChange = this._onChange.bind(this);
+        //this._onChange = this._onChange.bind(this);
         this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
         this.showAddEnderecos = this.showAddEnderecos.bind(this);
-        this.condicaoCarregaEnderecos = this.condicaoCarregaEnderecos.bind(this);
+        //this.condicaoCarregaEnderecos = this.condicaoCarregaEnderecos.bind(this);
+        this.getStateFromStores = this.getStateFromStores.bind(this);
+        this._onClick = this._onClick.bind(this);
+    }
+    
+    _onClick(){
+        console.log("_onClick");
+        EnderecoActions.clickNewEndereco();
+        console.log(this.props.history);
+        this.props.history.push("condominio/endereco");   
+        // todo go to manageEndereco     
     }
 
-    condicaoCarregaEnderecos(){
-        let retorno = false;
-
-        if(!EnderecoStore.getInitialized() && this.state.enderecos && this.state.enderecos.length > 0 ){
-            retorno = true;
-        }
-
-        console.log("condicao : "+ retorno);
-
-        return retorno;
-
+    getStateFromStores() {
+        return {
+          enderecos: EnderecoStore.getEnderecos()
+        };
     }
 
     componentDidMount(){
-        console.log("endereco componentDidMount");
-        if(this.condicaoCarregaEnderecos()){
-            EnderecoActions.carregaEnderecos(this.state.enderecos);
-        }else{
-            console.dir(EnderecoStore.getEnderecos());
-            this.setState({
-                enderecos : EnderecoStore.getEnderecos()
-            });            
-        }    
-        
-        //this.setState({
-            //enderecos: EnderecoStore.getEnderecos()
-        //});
-
-        
-        // if(this.props.idCondominio){
-        //     console.log("enderecoPage com id condominio");
-        //     if(!EnderecoStore.getInitialized()){
-        //         console.log("not inicialized");
-                
-        //         //this.setState({
-        //             this.state.enderecos = this.props.getEnderecos();
-        //         //});
-                
-        //         console.dir(this.state.enderecos);
-                
-        //         EnderecoActions.carregaEnderecos(this.state.enderecos);
-
-
-        //     }else{
-        //         console.log("inicialized");
-                
-        //         //this.setState({
-        //             //enderecos: EnderecoStore.getEnderecos()
-        //             this.state.enderecos = this.props.getEnderecos();
-        //         //});
-
-        //     }
-
-        // }else{
-
-        //     console.log("enderecoPage SEM id condominio");
-
-        //     console.log("EnderecoStore.getSavedState()");
-        //     console.log(EnderecoStore.getSavedState());
-
-        //     if(EnderecoStore.getSavedState()){
-                
-        //         //this.setState({
-        //             //enderecos: EnderecoStore.getEnderecos()
-        //             this.state.enderecos = EnderecoStore.getEndereco();
-        //         //});
-                
-        //         console.dir(endereco);
-
-        //     }else{
-        //         console.log("clean");
-        //         EnderecoActions.cleanEndereco();
-
-        //     }
-
-        // }
+      
         
     }
     
-    componentWillMount(){
-        EnderecoStore.addChangeListener(this._onChange);
-    }
-    
-    componentWillUnmount(){
-        EnderecoStore.removeChangeListener(this._onChange);
-    }
-    
-    _onChange(){
-        console.log("on change enderecosPage");
-        this.setState({ enderecos: EnderecoStore.getEnderecos()});
-    }
     
     qtdeEnderecos(){
         
         var labelEndereco = "Endereços"
         if(this.props.qtdeEndereco == 1){
-            labelEndereco = "Endereço"
+            labelEndereco = "Endereço";
         }
         return labelEndereco;
 
@@ -141,10 +70,11 @@ class EnderecosPage extends React.Component{
         return (
             <div className="container">
                <h1 className="page-header">{this.qtdeEnderecos()}</h1>
-               {this.showAddEnderecos() && <Link to={"/condominio/"+this.props.idCondominio+"/endereco"} className="btn btn-default">Adicionar Endereço</Link>}
+               {/* <div><a href="#" onClick={this._onClick.bind(this)}>Adicionar Condomínio</a></div> */}
+               <div><a href="#" onClick={this._onClick}>Adicionar Endereço</a></div>
+               {/* {this.showAddEnderecos() && <Link to={"/condominio/"+this.props.idCondominio+"/endereco"} className="btn btn-default">Adicionar Endereço</Link>} */}
                <EnderecoList 
                     enderecos={this.state.enderecos}
-                    idCondominio={this.props.idCondominio}
                 />   
             </div>    
         );

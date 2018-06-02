@@ -17,7 +17,7 @@ class CondominioList extends React.Component {
     _onClick(condominio, event){
         event.preventDefault();
         CondominioActions.clickCondominio(condominio);
-        this.props.history.push("condominio/"+condominio.id);
+        this.props.history.push("condominio");
     }
 
     afterDeleting(){
