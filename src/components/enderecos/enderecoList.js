@@ -12,9 +12,9 @@ class EnderecoList extends React.Component{
 
          console.log("EnderecoList constructor");
 
-       this.state = {
-           enderecos: this.props.enderecos
-       };
+       //this.state = {
+         //  enderecos: this.props.enderecos
+       //};
 
        this.deleteEndereco =  this.deleteEndereco.bind(this);
 
@@ -29,16 +29,13 @@ class EnderecoList extends React.Component{
     render(){
 
         var createEnderecoRow = function(endereco, index){
-            
-            console.log(endereco._id);
-            
-            var idEndereco = ( endereco._id ? endereco._id : index);
+
             
             return (
                 
                 <tr>
                     <td><a href="#" onClick={this.deleteEndereco.bind(this, endereco)}>Delete</a></td>
-                    <td><Link to={"/condominio/" + this.props.idCondominio +"/endereco/" + endereco._id }>{endereco.logradouro}</Link></td>
+                    <td><Link to={"/condominio/" + this.props.idCondominio +"/endereco/" + index }>{endereco.logradouro}</Link></td>
                     <td>{endereco.numero}</td>
                     <td>{endereco.bairro}</td>
                     <td>{endereco.cep}</td>
@@ -57,7 +54,7 @@ class EnderecoList extends React.Component{
                     <th>CEP</th>
                 </thead>    
                 <tbody>
-                    {this.state.enderecos.map(createEnderecoRow, this)}
+                    {this.props.enderecos.map(createEnderecoRow, this)}
                 </tbody>
                 </table>    
             </div>    

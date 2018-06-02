@@ -57,7 +57,7 @@ var FacilityStore = assign({}, EventEmitter.prototype,{
 
 Dispatcher.register(function(action){
     
-    console.dir(action);
+    
     if(!action.actionType) return;
     
     switch(action.actionType){

@@ -11,7 +11,7 @@ class EnderecoForm extends React.Component{
            
            <form className="container">
                 
-                <h1 className="page-header">Formulário Endereço</h1>   
+                <h1 className="page-header">Endereço</h1>   
                 
                 <BuscaCep 
                     onBusca={this.props.onBusca}

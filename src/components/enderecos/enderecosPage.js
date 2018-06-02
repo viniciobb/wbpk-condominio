@@ -20,68 +20,90 @@ class EnderecosPage extends React.Component{
         this._onChange = this._onChange.bind(this);
         this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
         this.showAddEnderecos = this.showAddEnderecos.bind(this);
+        this.condicaoCarregaEnderecos = this.condicaoCarregaEnderecos.bind(this);
+    }
+
+    condicaoCarregaEnderecos(){
+        let retorno = false;
+
+        if(!EnderecoStore.getInitialized() && this.state.enderecos && this.state.enderecos.length > 0 ){
+            retorno = true;
+        }
+
+        console.log("condicao : "+ retorno);
+
+        return retorno;
+
     }
 
     componentDidMount(){
+        console.log("endereco componentDidMount");
+        if(this.condicaoCarregaEnderecos()){
+            EnderecoActions.carregaEnderecos(this.state.enderecos);
+        }else{
+            console.dir(EnderecoStore.getEnderecos());
+            this.setState({
+                enderecos : EnderecoStore.getEnderecos()
+            });            
+        }    
+        
+        //this.setState({
+            //enderecos: EnderecoStore.getEnderecos()
+        //});
 
         
+        // if(this.props.idCondominio){
+        //     console.log("enderecoPage com id condominio");
+        //     if(!EnderecoStore.getInitialized()){
+        //         console.log("not inicialized");
+                
+        //         //this.setState({
+        //             this.state.enderecos = this.props.getEnderecos();
+        //         //});
+                
+        //         console.dir(this.state.enderecos);
+                
+        //         EnderecoActions.carregaEnderecos(this.state.enderecos);
+
+
+        //     }else{
+        //         console.log("inicialized");
+                
+        //         //this.setState({
+        //             //enderecos: EnderecoStore.getEnderecos()
+        //             this.state.enderecos = this.props.getEnderecos();
+        //         //});
+
+        //     }
+
+        // }else{
+
+        //     console.log("enderecoPage SEM id condominio");
+
+        //     console.log("EnderecoStore.getSavedState()");
+        //     console.log(EnderecoStore.getSavedState());
+
+        //     if(EnderecoStore.getSavedState()){
+                
+        //         //this.setState({
+        //             //enderecos: EnderecoStore.getEnderecos()
+        //             this.state.enderecos = EnderecoStore.getEndereco();
+        //         //});
+                
+        //         console.dir(endereco);
+
+        //     }else{
+        //         console.log("clean");
+        //         EnderecoActions.cleanEndereco();
+
+        //     }
+
+        // }
         
     }
     
     componentWillMount(){
         EnderecoStore.addChangeListener(this._onChange);
-
-        console.log("EnderecosPage componentWillMount");
-
-        //var enderecos = {};
-
-        if(this.props.idCondominio){
-            console.log("enderecoPage com id condominio");
-            if(!EnderecoStore.getInitialized()){
-                console.log("not inicialized");
-                
-                //this.setState({
-                    this.state.enderecos = this.props.getEnderecos();
-                //});
-                
-                console.dir(this.state.enderecos);
-                
-                EnderecoActions.carregaEnderecos(this.state.enderecos);
-
-
-            }else{
-                console.log("inicialized");
-                
-                //this.setState({
-                    //enderecos: EnderecoStore.getEnderecos()
-                    this.state.enderecos = this.props.getEnderecos();
-                //});
-
-            }
-
-        }else{
-
-            console.log("enderecoPage SEM id condominio");
-
-            console.log("EnderecoStore.getSavedState()");
-            console.log(EnderecoStore.getSavedState());
-
-            if(EnderecoStore.getSavedState()){
-                
-                //this.setState({
-                    //enderecos: EnderecoStore.getEnderecos()
-                    this.state.enderecos = EnderecoStore.getEndereco();
-                //});
-                
-                console.dir(endereco);
-
-            }else{
-                console.log("clean");
-                EnderecoActions.cleanEndereco();
-
-            }
-
-        }
     }
     
     componentWillUnmount(){
@@ -130,7 +152,7 @@ class EnderecosPage extends React.Component{
 };
 
 EnderecosPage.propTypes= {
-    getEnderecos: PropTypes.func.isRequired
+    enderecos: PropTypes.object.isRequired
 }
 
 module.exports = EnderecosPage;

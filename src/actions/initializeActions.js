@@ -23,9 +23,7 @@ var InitializeActions = {
         // });
 
         CondominioApi.getAllCondominios().then(function(responseCondominios){
-            console.log("initialStateCondominio - initializeActions");
-            console.dir(responseCondominios);
-            console.log(ActionTypes.INITIALIZE_CONDOMINIO);
+            
             Dispatcher.dispatch({
                 actionType: ActionTypes.INITIALIZE_CONDOMINIO,
                 initialData : {

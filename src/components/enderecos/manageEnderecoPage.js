@@ -29,6 +29,7 @@ class ManageEnderecoPage extends React.Component {
         };
 
         this._onChange = this._onChange.bind(this);
+        this.afterIncludeEndereco = this.afterIncludeEndereco.bind(this);
         this.buscaEndereco = this.buscaEndereco.bind(this);
         this.saveEndereco = this.saveEndereco.bind(this);
         this.setEnderecoState = this.setEnderecoState.bind(this);
@@ -59,20 +60,22 @@ class ManageEnderecoPage extends React.Component {
 
     // },
 
-    componentWillMount(){
+    componentDidMount(){
         
-        EnderecoStore.addChangeListener(this._onChange);
-
         if(this.props.match.params.idEndereco){
           
             console.log("id endereco") ;
             console.log(this.props.match.params.idEndereco);
-            console.dir(EnderecoStore.getEnderecoById(this.props.match.params.idEndereco));
-            this.state.endereco = EnderecoStore.getEnderecoById(this.props.match.params.idEndereco);
+            this.state.endereco = EnderecoStore.getEnderecoByIndex(this.props.match.params.idEndereco);                
             console.dir(this.state.endereco);
 
         }
 
+    }
+
+    componentWillMount(){
+        
+        EnderecoStore.addChangeListener(this._onChange);
     }
         
     setEnderecoState(event){ // called for every key press
@@ -81,43 +84,19 @@ class ManageEnderecoPage extends React.Component {
         
 
         
-        console.log("field : " + field);
-        console.log("value : " + value);
+        //console.log("field : " + field);
+        //console.log("value : " + value);
 
 
         this.state.endereco[field] = value;
 
-        console.dir(this.state.endereco);
-
-
-        console.log("typed : " + value);
+        //console.dir(this.state.endereco);
+        //console.log("typed : " + value);
         this.setState({ dirty: true });
         return this.state.endereco;
     }
-    
-    saveEndereco(event){ 
-        event.preventDefault();
-        
-        console.dir(this.state.endereco);
 
-        if(!this.enderecoFormIsValid()){
-            return;
-        }
-        
-        console.dir(this.state.endereco);
-
-        if(this.props.match.params.idEndereco){
-
-            EnderecoActions.updateEndereco(this.state.endereco, this.props.match.params.idEndereco);
-
-        }else{
-
-            EnderecoActions.createEndereco(this.state.endereco);
-
-        }
-               
-        
-        console.log(this.props.match.params.idCondominio);
+    afterIncludeEndereco(){
         
         if(this.props.match.params.idCondominio)
             
@@ -129,7 +108,30 @@ class ManageEnderecoPage extends React.Component {
             
             this.props.history.push("/condominio");
 
-        }    
+        }
+
+    }
+    
+    saveEndereco(event){ 
+        event.preventDefault();
+
+        if(!this.enderecoFormIsValid()){
+            return;
+        }
+
+
+        if(this.props.match.params.idEndereco){
+
+            EnderecoActions.updateEndereco(this.state.endereco, this.props.match.params.idEndereco);
+
+        }else{
+
+            EnderecoActions.createEndereco(this.state.endereco);
+
+        }
+               
+        this.afterIncludeEndereco();
+            
 
     }
 
@@ -151,11 +153,7 @@ class ManageEnderecoPage extends React.Component {
 
     }
 
-    
-    /**
-     * creating reusable inputs
-     * 
-     */
+ 
     render(){
         return (
             <EnderecoForm 

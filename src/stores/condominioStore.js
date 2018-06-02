@@ -25,17 +25,10 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 
     getAllCondominios: function(){
         
-        console.log("all condominios");
-        console.dir(_condominios);
-        
         return _condominios;        
     },
 
     getCondominioById: function(id){
-        
-        console.log("condominio store get condominio by id ");
-        console.dir(_condominios);
-        console.log(id);
 
         var condominio;
 
@@ -43,8 +36,7 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 
             condominio = _.find(_condominios, {id : id});
         }
-        console.log("condominio filtrado");    
-        console.log(condominio);
+        
         return condominio;
     },
 
@@ -96,15 +88,15 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 
 });
 
-Dispatcher.register(function(action){
-    console.dir(action);
+CondominioStore.dispatchToken = Dispatcher.register(function(action){
+    
     if(!action.actionType) return;
     
     switch(action.actionType){
         // this is the part that varies...
         
         case  ActionTypes.INITIALIZE_CONDOMINIO:
-            console.log("CondominioStore INITIALIZE_CONDOMINIO");
+            
             if(action.initialData && action.initialData.condominios)
                 _condominios = action.initialData.condominios;
             CondominioStore.emitChange();
@@ -112,12 +104,33 @@ Dispatcher.register(function(action){
         
         case ActionTypes.CREATE_CONDOMINIO:
             _condominios.push(action.condominio);
-            console.log("_condominios");
-            console.dir(_condominios);
             _condominio = {};
             _saved_state = false;
             CondominioStore.emitChange();
-            break;
+        break;
+
+        case ActionTypes.CLICK_CONDOMINIO:
+            _condominio = action.condominio;
+            console.dir(_condominio);
+            _saved_state = true;
+            CondominioStore.emitChange();
+        break;
+
+        case ActionTypes.CLICK_NEW_CONDOMINIO:
+            _condominio = {
+                    nome: '',
+                    cnpj: 0,
+                    quantidadeApartamentos: 0,
+                    quantidadeBlocos: 0,
+                    quantidadeElevadores: 0,
+                    quantidadeVagas: 0,
+                    id: 0,
+                    enderecos: [],
+                    facilities: []
+            };
+            _saved_state = true;
+            CondominioStore.emitChange();
+        break;
 
         case ActionTypes.UPDATE_CONDOMINIO:
             var existingCondominio = _.find(_condominios, {id : action.condominio.id});

@@ -4,6 +4,7 @@ import About from './about/aboutPage';
 import ManageCondominioPage from './condominios/manageCondominioPage';
 import manageEnderecoPage from './enderecos/manageEnderecoPage';
 import CondominiosPage from './condominios/condominiosPage';
+import CondominioList from './condominios/condominioList';
 
 // import CondominiosPage from './condominios/condominiosPage';
 import NotFoundPage from './notFoundPage';
@@ -19,6 +20,7 @@ const Main = () => (
       <Route path="/condominio/:idCondominio/endereco/:idEndereco" component={manageEnderecoPage}/>
       <Route path="/condominio/:idCondominio/endereco" component={manageEnderecoPage}/>
       <Route exact path="/condominios" component={CondominiosPage}/>
+      <Route exact path="/condominioList" component={CondominioList}/>
       <Route component={NotFoundPage}/>
     </Switch>
   </main>

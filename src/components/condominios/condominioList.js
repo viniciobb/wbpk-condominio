@@ -2,20 +2,22 @@
 import React from 'react';
 import CondominioActions from '../../actions/condominioActions';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Toastr from 'toastr';
 
-//
-//var Router = require('react-router');
-//var Link = Router.Link;
-//var CondominioActions = require("../../actions/condominioActions");
-//var Toastr = require("toastr");
+
 class CondominioList extends React.Component {
 
     constructor(props) {
          super(props);
          this.afterDeleting = this.afterDeleting.bind(this);
          this.deleteCondominio = this.deleteCondominio.bind(this);
+         this._onClick =  this._onClick.bind(this);
+    }
+
+    _onClick(condominio, event){
+        event.preventDefault();
+        CondominioActions.clickCondominio(condominio);
+        this.props.history.push("condominio/"+condominio.id);
     }
 
     afterDeleting(){
@@ -33,16 +35,11 @@ class CondominioList extends React.Component {
     render(){
         
         var createCondominioRow = function(condominio){
-            console.log("Rendering createCondominioRow");
-            console.dir(condominio);
+            
             return (
                 <tr key={condominio.id}>
-                    <td><a href="#" onClick={this.deleteCondominio.bind(this, condominio.id)}>Delete</a></td>
-                    <td>
-                        <Link to={"condominio/"+condominio.id}>{
-                            condominio.nome}
-                        </Link>
-                    </td>
+                    <td><a href="#" onClick={this.deleteCondominio.bind(this,condominio.id)}>Delete</a></td>
+                    <td><a href="#" onClick={this._onClick.bind(this,condominio)}>{condominio.nome}</a></td>
                     <td>{condominio.cnpj}</td>
                 </tr>
             );

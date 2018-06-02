@@ -1,6 +1,7 @@
 "use strict";
 import React from 'react';
 import CondominioStore from '../../stores/condominioStore';
+import CondominioActions from '../../actions/condominioActions';
 import { Link } from 'react-router-dom';
 import CondominioList from './condominioList';
 
@@ -19,6 +20,13 @@ class CondominiosPage extends React.Component {
         // });
 
         this._onChange = this._onChange.bind(this);
+        this._onClick = this._onClick.bind(this);
+    }
+
+    _onClick(){
+        event.preventDefault();
+        CondominioActions.clickNewCondominio();
+        this.props.history.push("/condominio");
     }
 
     componentDidMount(){
@@ -55,9 +63,13 @@ class CondominiosPage extends React.Component {
         return (
             <div className="container">
                <h1 className="page-header">Condomínios</h1>
-               <Link to="/condominio" className="btn btn-default">Adicionar Condomínio</Link>
+               <div><a href="#" onClick={this._onClick.bind(this)}>Adicionar Condomínio</a></div>
+               {/* <Link to="/condominio" className="btn btn-default">Adicionar Condomínio</Link> */}
                <CondominioList 
-                    condominios={this.state.condominios}/>    
+                    condominios={this.state.condominios}
+                    history={this.props.history}
+                    />
+
             </div>    
         );
     }

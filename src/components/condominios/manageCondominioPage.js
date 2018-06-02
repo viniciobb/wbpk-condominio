@@ -2,6 +2,8 @@
 import React from 'react';
 import CondominioForm from './condominioForm';
 import CondominioStore from "../../stores/condominioStore";
+import EnderecoStore from "../../stores/enderecoStore";
+import FacilityStore from "../../stores/facilityStore";
 //import EnderecoStore from "../../stores/enderecoStore";
 //import FacilityStore from "../../stores/facilityStore";
 import CondominioActions from "../../actions/condominioActions";
@@ -14,51 +16,67 @@ class ManageCondominioPage extends React.Component {
     constructor(props) {
         super(props);
         console.log("ManageCondominioPage constructor");
-        this.state = {
-            condominio: {
-                nome: '',
-                cnpj: 0,
-                quantidadeApartamentos: 0,
-                quantidadeBlocos: 0,
-                quantidadeElevadores: 0,
-                quantidadeVagas: 0,
-                id: 0,
-                enderecos: [],
-                facilities: []
-            },
-            errors: {},
-            dirty: false
-        };
+        this.state = this.getStateFromStores();
+        this.state.errors= {};
+        this.state.dirty= false;
+
+        // this.state = {
+        //     condominio: {
+        //         nome: '',
+        //         cnpj: 0,
+        //         quantidadeApartamentos: 0,
+        //         quantidadeBlocos: 0,
+        //         quantidadeElevadores: 0,
+        //         quantidadeVagas: 0,
+        //         id: 0,
+        //         enderecos: [],
+        //         facilities: []
+        //     },
+        //     errors: {},
+        //     dirty: false
+        // };
+        console.log(this.state);
+        
         this.setCondominioState = this.setCondominioState.bind(this);
         this.condominioFormIsValid = this.condominioFormIsValid.bind(this);
         //this.getEnderecos = this.getEnderecos.bind(this);
         //this.getFacilities = this.getFacilities.bind(this);
         this.afterSavingCondominio = this.afterSavingCondominio.bind(this);
         this.saveCondominio = this.saveCondominio.bind(this);
+        this.getStateFromStores = this.getStateFromStores.bind(this); 
         
     }
 
-    componentWillMount(){
-        console.log("componentWillMount managerCondominio");
-        var condominioId = this.props.match.params.id; // from the path /condominio/:id
-        if(condominioId && condominioId != '0' ){
-            this.setState({condominio: CondominioStore.getCondominioById(condominioId)});
-        }else{
-            var condominioState = CondominioStore.getStateCondominio();
-            if(condominioState){
-                this.setState({condominio: condominioState});                
-            }
-            else{
-                //this.setState({condominio: CondominioStore.getNewCondominio()});                
-            //    if(EnderecoStore.getSavedState()){
-            //        this.state.condominio.enderecos = EnderecoStore.getEnderecos();
-            //    }
+    getStateFromStores() {
+        return {
+          condominio: CondominioStore.getStateCondominio(),
+          endereco:   EnderecoStore.getEnderecos()
+        };
+    }
+    
 
-            //    if(FacilityStore.getSavedState()){
-            //     this.state.condominio.facilities = FacilityStore.getFacilities();
-            //    }
-            }
-        }
+    componentDidMount(){
+        
+        // console.log("componentDidMount managerCondominio");
+        // var condominioId = this.props.match.params.id; // from the path /condominio/:id
+        // if(condominioId && condominioId != '0' ){
+        //     this.setState({condominio: CondominioStore.getCondominioById(condominioId)});
+        // }else{
+        //     var condominioState = CondominioStore.getStateCondominio();
+        //     if(condominioState){
+        //         this.setState({condominio: condominioState});                
+        //     }
+        //     else{
+        //         //this.setState({condominio: CondominioStore.getNewCondominio()});                
+        //     //    if(EnderecoStore.getSavedState()){
+        //     //        this.state.condominio.enderecos = EnderecoStore.getEnderecos();
+        //     //    }
+
+        //     //    if(FacilityStore.getSavedState()){
+        //     //     this.state.condominio.facilities = FacilityStore.getFacilities();
+        //     //    }
+        //     }
+        // }
     }
 
     setCondominioState(event){ // called for every key press
@@ -93,6 +111,23 @@ class ManageCondominioPage extends React.Component {
          Toastr.success('Condominio saved.');
          this.props.history.push("/condominios");
      }
+
+    //componentWillUnmount(){
+        //EnderecoStore.removeChangeListener(this._onChange);
+    //}
+    
+    // _onChange(){
+    //     console.log("onChange manage condominio");
+    //     console.dir(this.state);
+    //     console.dir(EnderecoStore.getEnderecos());
+    //     this.state.condominio.enderecos = EnderecoStore.getEnderecos();
+    // }
+
+    // componentWillMount(){
+
+    //     EnderecoStore.addChangeListener(this._onChange);
+    // }    
+
 
     // getEnderecos(){   
        

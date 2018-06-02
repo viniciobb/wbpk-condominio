@@ -12,7 +12,7 @@ class CondominioForm extends React.Component{
         return ( 
             <div className="container">
                 <form>
-                <h1 className="page-header">Formulário Condomínio</h1>
+                <h1 className="page-header">Condomínio</h1>
                     <Input 
                         label="Nome"
                         name="nome"
@@ -56,11 +56,11 @@ class CondominioForm extends React.Component{
                         error={this.props.errors.quantidadeVagas}
                     />
 
-                    {/* <EnderecosPage
+                     <EnderecosPage
                         idCondominio={this.props.condominio.id}
-                        getEnderecos={this.props.getEnderecos}
+                        enderecos={this.props.condominio.enderecos}
                         qtdeEndereco={1}
-                    /> */}
+                    />
 
                     {/* <FacilitiesPage
                         idCondominio={this.props.condominio.id}

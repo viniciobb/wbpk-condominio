@@ -1,6 +1,5 @@
 "use strict"
 var Dispatcher = require("../dispatcher/appDispatcher");
-var ParentTypes = require("../constants/parentTypes");
 var ActionTypes = require("../constants/actionTypes");
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
@@ -32,7 +31,6 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
 
     getEndereco: function(){
         
-        console.dir(_endereco);
         return _endereco;
     },
 
@@ -43,11 +41,14 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
 
     getEnderecoById: function(id){
 
-        console.log(id);
-        console.dir(_enderecos);
         var endereco = _.find(_enderecos, {_id : id});
-        console.dir(endereco);     
         return endereco;
+    },
+
+    getEnderecoByIndex: function(index){
+        
+        return _enderecos[index];
+        
     },
 
     getInitialized: function(){
@@ -58,17 +59,30 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
 });
 
 Dispatcher.register(function(action){
-    
-    console.dir(action);
 
     if(!action.actionType) return;
-    
-    console.dir(action.enderecos);
 
     switch(action.actionType){
-        // this is the part that varies...
-
         
+        case ActionTypes.CLICK_CONDOMINIO:
+            console.log("CLICK_CONDOMINIO");
+            console.dir(action.condominio);
+            _enderecos = action.condominio.enderecos;
+            _endereco = {};
+            //_initialized = true;
+            //_saved_state = true;
+            
+        break;
+
+        case ActionTypes.CLICK_NEW_CONDOMINIO:
+            console.log("_NEW_CONDOMINIO");
+            _enderecos = [];
+            _endereco = {};
+            _initialized = false;
+            _saved_state = false;
+
+        break;
+
         case ActionTypes.CLEAN_ENDERECO:
             console.dir(_endereco);
             _enderecos = [];
@@ -77,7 +91,7 @@ Dispatcher.register(function(action){
             _saved_state = false;
             EnderecoStore.emitChange();
             console.log("erase CLEAN _ENDERECO");
-            break;
+        break;
         
         case ActionTypes.INIT_ENDERECO:
             if(action.enderecos.length > 0 )
@@ -90,11 +104,7 @@ Dispatcher.register(function(action){
             break;
         
         case ActionTypes.CREATE_ENDERECO:
-            console.log(typeof(_enderecos));
-            console.dir(_enderecos);
             _enderecos.push(action.endereco);
-            console.log("_enderecos in endereco Store");
-            console.dir(_enderecos);
             _endereco = {};
             _saved_state = true;
             EnderecoStore.emitChange();
@@ -112,11 +122,8 @@ Dispatcher.register(function(action){
                 numero: 0,
                 complemento : ""
             };
-
-            
             
             _endereco = enderecoModel;
-            console.dir(_endereco);
             _saved_state = true;
             EnderecoStore.emitChange();
             break;  

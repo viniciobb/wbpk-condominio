@@ -18,6 +18,22 @@ var CondominioActions = {
 
         });
     },
+
+    clickCondominio: function(_condominio){
+
+            Dispatcher.dispatch({
+                actionType: actionTypes.CLICK_CONDOMINIO,
+                condominio: _condominio
+            });
+    },
+
+    clickNewCondominio: function(){
+
+        Dispatcher.dispatch({
+            actionType: actionTypes.CLICK_NEW_CONDOMINIO
+        });
+        
+    },
  
     //SAVE_STATE_CONDOMINIO: null,
     //GET_STATE_CONDOMINIO: null,    
