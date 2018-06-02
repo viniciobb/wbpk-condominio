@@ -71,7 +71,7 @@ class EnderecosPage extends React.Component{
             <div className="container">
                <h1 className="page-header">{this.qtdeEnderecos()}</h1>
                {/* <div><a href="#" onClick={this._onClick.bind(this)}>Adicionar Condomínio</a></div> */}
-               <div><a href="#" onClick={this._onClick}>Adicionar Endereço</a></div>
+               { this.showAddEnderecos() && <div><a href="#" onClick={this._onClick}>Adicionar Endereço</a></div>}
                {/* {this.showAddEnderecos() && <Link to={"/condominio/"+this.props.idCondominio+"/endereco"} className="btn btn-default">Adicionar Endereço</Link>} */}
                <EnderecoList 
                     enderecos={this.state.enderecos}
