@@ -155,11 +155,17 @@ Dispatcher.register(function(action){
         
         case ActionTypes.DELETE_ENDERECO:
             //_enderecos.push(action.endereco);
+            console.log(action.endereco);
+            console.log(_enderecos);
             var find = false;
             if(action.endereco.id){
+                console.log("existe id");
                 var existingEndereco = _.find(_enderecos, {id : action.endereco.id});
+                console.log(existingEndereco);
                 var existingEnderecoIndex = _.indexOf(_enderecos, existingEndereco);
+                console.log(existingEnderecoIndex);
                 _enderecos.splice(existingEnderecoIndex,1);
+                console.dir(_enderecos);
                 var find = true;
             }else{
                 var existingEndereco = _.find(_enderecos, {logradouro : action.endereco.logradouro, 

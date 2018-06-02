@@ -22,6 +22,7 @@ class EnderecoList extends React.Component{
 
     deleteEndereco(endereco, event){ 
         event.preventDefault();
+        console.log(endereco);
         EnderecoActions.deleteEndereco(endereco);
         Toastr.success("Endereco Deleted" + endereco.logradouro);
     }

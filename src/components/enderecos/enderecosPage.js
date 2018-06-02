@@ -16,7 +16,7 @@ class EnderecosPage extends React.Component{
         this.state = this.getStateFromStores(); 
         console.log(this.state.enderecos);
 
-        //this._onChange = this._onChange.bind(this);
+        this._onChange = this._onChange.bind(this);
         this.qtdeEnderecos = this.qtdeEnderecos.bind(this);
         this.showAddEnderecos = this.showAddEnderecos.bind(this);
         //this.condicaoCarregaEnderecos = this.condicaoCarregaEnderecos.bind(this);
@@ -24,6 +24,27 @@ class EnderecosPage extends React.Component{
         this._onClick = this._onClick.bind(this);
     }
     
+    componentWillMount (){
+        EnderecoStore.addChangeListener(this._onChange);
+   }
+   
+   componentWillUnmount (){
+        EnderecoStore.removeChangeListener(this._onChange);
+   }
+   
+   _onChange(){
+       
+       console.log("on_change EnderecosPage")
+
+       this.setState(function(prevState, props){
+           return {
+                enderecos: EnderecoStore.getEnderecos()
+           };            
+       });
+   }
+
+
+
     _onClick(){
         console.log("_onClick");
         EnderecoActions.clickNewEndereco();
