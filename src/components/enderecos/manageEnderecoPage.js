@@ -11,22 +11,9 @@ class ManageEnderecoPage extends React.Component {
     constructor(props) {
         super(props);
         console.log("ManageEnderecoPage constructor");
-        this.state = {
-            endereco: {
-                logradouro: '',
-                numero: 0,
-                complemento: '',
-                bairro: '',
-                cep: 0,
-                siglaFederacao: '',
-                cidade: '',
-                estado: '',
-                id: ''
-            
-            },
-            errors: {},
-            dirty: false
-        };
+        this.state = this.getStateFromStores();
+        this.state.errors= {};
+        this.state.dirty= false;
 
         this._onChange = this._onChange.bind(this);
         this.afterIncludeEndereco = this.afterIncludeEndereco.bind(this);
@@ -34,6 +21,13 @@ class ManageEnderecoPage extends React.Component {
         this.saveEndereco = this.saveEndereco.bind(this);
         this.setEnderecoState = this.setEnderecoState.bind(this);
         this.enderecoFormIsValid = this.enderecoFormIsValid.bind(this);
+        this.getStateFromStores = this.getStateFromStores.bind(this); 
+    }
+
+    getStateFromStores() {
+        return {
+          endereco:   EnderecoStore.getEndereco()
+        };
     }
     
     componentWillUnmount(){
@@ -62,14 +56,14 @@ class ManageEnderecoPage extends React.Component {
 
     componentDidMount(){
         
-        if(this.props.match.params.idEndereco){
+        // if(this.props.match.params.idEndereco){
           
-            console.log("id endereco") ;
-            console.log(this.props.match.params.idEndereco);
-            this.state.endereco = EnderecoStore.getEnderecoByIndex(this.props.match.params.idEndereco);                
-            console.dir(this.state.endereco);
+        //     console.log("id endereco") ;
+        //     console.log(this.props.match.params.idEndereco);
+        //     this.state.endereco = EnderecoStore.getEnderecoByIndex(this.props.match.params.idEndereco);                
+        //     console.dir(this.state.endereco);
 
-        }
+        // }
 
     }
 
@@ -98,17 +92,17 @@ class ManageEnderecoPage extends React.Component {
 
     afterIncludeEndereco(){
         
-        if(this.props.match.params.idCondominio)
+        // if(this.props.match.params.idCondominio)
             
-            this.props.history.push("/condominio/"+this.props.match.params.idCondominio);
+        //     this.props.history.push("/condominio/"+this.props.match.params.idCondominio);
 
-            //this.transitionTo('manageCondominio', {id: this.props.params.match.idCondominio});
+        //     //this.transitionTo('manageCondominio', {id: this.props.params.match.idCondominio});
             
-        else{
+        // else{
             
             this.props.history.push("/condominio");
 
-        }
+        //}
 
     }
     

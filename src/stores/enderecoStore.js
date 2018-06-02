@@ -87,7 +87,17 @@ Dispatcher.register(function(action){
 
         case ActionTypes.CLICK_NEW_ENDERECO:
             console.log("_NEW_ENDERECO");
-            _endereco = {};
+            _endereco = {
+                logradouro: '',
+                numero: 0,
+                complemento: '',
+                bairro: '',
+                cep: 0,
+                siglaFederacao: '',
+                cidade: '',
+                estado: '',
+                id: ''
+            };
             _saved_state = false;
         break;
 
