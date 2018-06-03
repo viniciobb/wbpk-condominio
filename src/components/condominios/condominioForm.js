@@ -61,10 +61,9 @@ class CondominioForm extends React.Component{
                         history={this.props.history} 
                     />
 
-                    {/* <FacilitiesPage
-                        idCondominio={this.props.condominio.id}
-                        getFacilities={this.props.getFacilities}
-                    /> */}
+                     <FacilitiesPage
+                        history={this.props.history}                         
+                    />
 
                     <input type="submit" value="Save" onClick={this.props.onSave} className="btn btn-default"/>
                 </form>               

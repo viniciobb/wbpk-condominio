@@ -1,5 +1,6 @@
 "use strict"
 var Dispatcher = require("../dispatcher/appDispatcher");
+var CondominioStore = require("./condominioStore");
 // apagar ?? var ParentTypes = require("../constants/parentTypes");
 var ActionTypes = require("../constants/actionTypes");
 var EventEmitter = require("events").EventEmitter;
@@ -11,6 +12,7 @@ var _facilities = []; // outside the export module
 var _initialized = false;
 var _facility = {};
 var _saved_state = false;
+var _index=0;
 
 // take an empty object, take the emitEmitter.prototype and 
 // add everything on the last object
@@ -71,6 +73,45 @@ Dispatcher.register(function(action){
             _saved_state = false;
             FacilityStore.emitChange();
             break;
+
+        case ActionTypes.CLICK_CONDOMINIO:
+            Dispatcher.waitFor([CondominioStore.dispatchToken]);
+            console.log("CLICK_CONDOMINIO");
+            console.dir(action.condominio);
+            _facilities = action.condominio.facilities;
+            _facility = {};
+            FacilityStore.emitChange();
+        break;
+        
+        case ActionTypes.CLICK_NEW_CONDOMINIO:
+            console.log("_NEW_CONDOMINIO");
+            _facilities = [];
+            _facility = {};
+            FacilityStore.emitChange();
+        break;
+
+        case ActionTypes.CLICK_NEW_FACILITY:
+            console.log("CLICK_NEW_FACILITY");
+            _facility = {
+                nomefacility: '',
+                tempoReserva: '',
+                disponibilidadeDia: '',
+                disponibilidadeHora: '',
+                valor: 0,
+                regrasUso: '',
+                id: ''
+            };
+            _index=0;
+            _saved_state = false;
+            FacilityStore.emitChange();
+        break;
+   
+        case ActionTypes.CLICK_FACILITY:
+            _facility = action.facility;
+            _index = action.index;
+            _saved_state = true;    
+            FacilityStore.emitChange();
+        break;
         
         case ActionTypes.INIT_FACILITY:
             _facilities = action.facilities;

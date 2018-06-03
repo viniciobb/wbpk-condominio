@@ -11,13 +11,17 @@ class FacilitiesPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            facilities : []
-        };
-
+        this.state = this.getStateFromStores(); 
+        this.getStateFromStores = this.getStateFromStores.bind(this);
         this._onChange = this._onChange.bind(this);
         
     } 
+
+    getStateFromStores() {
+        return {
+            facilities: FacilityStore.getFacilities()
+        };
+    }
     
     componentWillMount(){
         FacilityStore.addChangeListener(this._onChange);
@@ -28,34 +32,34 @@ class FacilitiesPage extends React.Component {
 
     componentDidMount(){
 
-        if(this.props.idCondominio){
+        // if(this.props.idCondominio){
             
-            if(!FacilityStore.getInitialized()){
-                facilities = this.props.getFacilities(); 
-                FacilityActions.carregaFacilities(facilities);
+        //     if(!FacilityStore.getInitialized()){
+        //         facilities = this.props.getFacilities(); 
+        //         FacilityActions.carregaFacilities(facilities);
 
-            }else{
-                facilities = FacilityStore.getFacilities();
-            }
+        //     }else{
+        //         facilities = FacilityStore.getFacilities();
+        //     }
 
-        }else{
+        // }else{
            
 
-            if(FacilityStore.getSavedState()){
+        //     if(FacilityStore.getSavedState()){
 
-                facilities = FacilityStore.getFacilities();
+        //         facilities = FacilityStore.getFacilities();
 
-            }else{
+        //     }else{
 
-                FacilityActions.cleanFacility();
+        //         FacilityActions.cleanFacility();
 
-            }
+        //     }
 
 
-        }
+        // }
 
-        console.log("facilities in facility page");
-        console.dir(this.state.facilities);
+        // console.log("facilities in facility page");
+        // console.dir(this.state.facilities);
     }
     
     _onChange(){

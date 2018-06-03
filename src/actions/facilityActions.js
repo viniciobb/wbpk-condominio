@@ -15,6 +15,24 @@ var FacilityActions = {
         });
     },
 
+    clickNewFacility: function(){
+
+        Dispatcher.dispatch({
+            actionType: actionTypes.CLICK_NEW_FACILITY
+        });
+    },
+
+
+    clickFacility: function(facility, index){
+        Dispatcher.dispatch({
+            actionType: actionTypes.CLICK_FACILITY,
+            facility: facility,
+            index: index
+        });
+    },
+
+
+
     cleanFacility: function(){
         Dispatcher.dispatch({
             actionType: actionTypes.CLEAN_FACILITY
