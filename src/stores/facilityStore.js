@@ -13,7 +13,8 @@ var _initialized = false;
 var _facility = {};
 var _saved_state = false;
 var _index=0;
-
+var _update = false;
+            
 // take an empty object, take the emitEmitter.prototype and 
 // add everything on the last object
 var FacilityStore = assign({}, EventEmitter.prototype,{
@@ -51,6 +52,12 @@ var FacilityStore = assign({}, EventEmitter.prototype,{
         
         
         return _initialized;
+    },
+
+    getUpdate: function(){
+        
+        return _update;
+
     }
 
     
@@ -80,6 +87,8 @@ Dispatcher.register(function(action){
             console.dir(action.condominio);
             _facilities = action.condominio.facilities;
             _facility = {};
+            _update = false;
+            _index = 0;
             FacilityStore.emitChange();
         break;
         
@@ -87,6 +96,8 @@ Dispatcher.register(function(action){
             console.log("_NEW_CONDOMINIO");
             _facilities = [];
             _facility = {};
+            _update = false;
+            _index = 0;
             FacilityStore.emitChange();
         break;
 
@@ -103,13 +114,14 @@ Dispatcher.register(function(action){
             };
             _index=0;
             _saved_state = false;
+            _update = false;
             FacilityStore.emitChange();
         break;
    
         case ActionTypes.CLICK_FACILITY:
             _facility = action.facility;
             _index = action.index;
-            _saved_state = true;    
+            _update = true;    
             FacilityStore.emitChange();
         break;
         
@@ -123,16 +135,18 @@ Dispatcher.register(function(action){
         
         case ActionTypes.CREATE_FACILITY:
             _facilities.push(action.facility);
-            
             //_initialized = true;
             _facility = {};
+            _update=false;
             _saved_state = true;
             FacilityStore.emitChange();
         break;
 
         case ActionTypes.UPDATE_FACILITY:
-            _facilities[action.index] = action.facility;
+            _facilities[_index] = action.facility;
             _facility = {};
+            _index=0;
+            _update=false;
             _saved_state = true;    
             FacilityStore.emitChange();
         break;

@@ -39,11 +39,10 @@ var FacilityActions = {
         });
     },
 
-    updateFacility: function(facility, index){
+    updateFacility: function(facility){
         Dispatcher.dispatch({
             actionType: actionTypes.UPDATE_FACILITY,
-            facility: facility,
-            index : index
+            facility: facility
         });
     },
 

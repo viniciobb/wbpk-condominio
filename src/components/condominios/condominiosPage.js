@@ -57,6 +57,8 @@ class CondominiosPage extends React.Component {
                 condominios:  CondominioStore.getAllCondominios() 
             };            
         });
+
+        console.dir(this.state.condominios);
     }
 
     render(){

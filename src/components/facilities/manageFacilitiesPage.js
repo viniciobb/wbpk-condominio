@@ -76,16 +76,17 @@ class ManageFacilitiesPage extends React.Component {
         
         console.dir(this.state.facility);
         
+        console.log(FacilityStore.getUpdate());
 
-        // if(this.props.params.idFacility){
+         if(FacilityStore.getUpdate()){
 
-        //     FacilityActions.updateFacility(this.state.facility, this.props.match.params.idFacility);
+             FacilityActions.updateFacility(this.state.facility);
 
-        // }else{
+            }else{
 
             FacilityActions.createFacility(this.state.facility);
 
-        //}
+        }
                
         
         //console.log(this.props.params.idCondominio);

@@ -11,9 +11,10 @@ class EnderecosPage extends React.Component{
     constructor(props) {
         super(props);
         
-        console.log("EnderecosPage constructor");
+        
 
         this.state = this.getStateFromStores(); 
+        console.log("EnderecosPage constructor");
         console.log(this.state.enderecos);
 
         this._onChange = this._onChange.bind(this);

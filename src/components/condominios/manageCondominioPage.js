@@ -4,11 +4,7 @@ import CondominioForm from './condominioForm';
 import CondominioStore from "../../stores/condominioStore";
 import EnderecoStore from "../../stores/enderecoStore";
 import FacilityStore from "../../stores/facilityStore";
-//import EnderecoStore from "../../stores/enderecoStore";
-//import FacilityStore from "../../stores/facilityStore";
 import CondominioActions from "../../actions/condominioActions";
-//import EnderecoActions from "../../actions/enderecoActions";
-//import FacilityActions from "../../actions/facilityActions";
 import Toastr from "toastr";
 
 class ManageCondominioPage extends React.Component {

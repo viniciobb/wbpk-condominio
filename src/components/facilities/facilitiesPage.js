@@ -12,6 +12,9 @@ class FacilitiesPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.getStateFromStores(); 
+        console.log("FacilitiesPage constructor");
+        console.log(this.state.facilities);
+        
         this.getStateFromStores = this.getStateFromStores.bind(this);
         this._onChange = this._onChange.bind(this);
         this._onClick = this._onClick.bind(this);
@@ -84,12 +87,12 @@ class FacilitiesPage extends React.Component {
         
         return (
             <div className="container">
-               <h1 className="page-header">Facilities Page</h1>
+               <h1 className="page-header">Facilities</h1>
                <div><a href="#" onClick={this._onClick}>Adicionar Facility</a></div>
                {/* <Link to="addFacility" params={{idCondominio: this.props.idCondominio}} className="btn btn-default">Adicionar Facility</Link> */}
                <FacilitiesList 
                     facilities={this.state.facilities}
-                    idCondominio={this.props.idCondominio}
+                    history={this.props.history}
                 />   
             </div>    
         );

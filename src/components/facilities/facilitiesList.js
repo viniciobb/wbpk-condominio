@@ -7,26 +7,48 @@ import FacilityActions from "../../actions/facilityActions";
 import Toastr from "toastr";
 
 class FacilitiesList extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        console.log("FacilitiesList constructor");
+
+      //this.state = {
+        //  enderecos: this.props.enderecos
+      //};
+
+      this.deleteFacility =  this.deleteFacility.bind(this);
+      this._onClick =  this._onClick.bind(this);
+
+    }
+    
+    _onClick(facility, index , event){
+        event.preventDefault();
+        console.log(facility);
+        FacilityActions.clickFacility(facility, index);
+        this.props.history.push("condominio/facility");
+    }
     
      deleteFacility(facility, event){
          event.preventDefault();
          FacilityActions.deleteFacility(facility);
-         Toastr.success("facility Deleted" + facility.nomefacility);
+         Toastr.success("Facility Apagada");
      }
 
     render(){
         
         var createFacilityRow = function(facility, index){
             
-            console.dir(facility);
+            // console.dir(facility);
             
-            var idFacility = ( facility.id ? facility.id : index);
+            // var idFacility = ( facility.id ? facility.id : index);
             
             return (
                 
                 <tr>
                     <td><a href="#" onClick={this.deleteFacility.bind(this, facility)}>Delete</a></td>
-                    <td><Link to="manageFacility" params={{ idCondominio: this.props.idCondominio, idFacility: idFacility }}>{facility.nomefacility}</Link></td>
+                    {/* <td><Link to="manageFacility" params={{ idCondominio: this.props.idCondominio, idFacility: idFacility }}>{facility.nomefacility}</Link></td> */}
+                    <td><a href="#" onClick={this._onClick.bind(this, facility, index)}>{facility.nomefacility}</a></td>
                 </tr>
             );
         };
