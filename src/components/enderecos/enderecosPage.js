@@ -97,6 +97,7 @@ class EnderecosPage extends React.Component{
                <EnderecoList 
                     enderecos={this.state.enderecos}
                     history={this.props.history}
+                    qtdeEndereco={this.props.qtdeEndereco}
                 />   
             </div>    
         );

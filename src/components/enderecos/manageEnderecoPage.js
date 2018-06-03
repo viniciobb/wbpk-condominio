@@ -114,15 +114,11 @@ class ManageEnderecoPage extends React.Component {
         }
 
 
-        if(this.props.match.params.idEndereco){
+        
 
-            EnderecoActions.updateEndereco(this.state.endereco, this.props.match.params.idEndereco);
+        EnderecoActions.createEndereco(this.state.endereco);
 
-        }else{
-
-            EnderecoActions.createEndereco(this.state.endereco);
-
-        }
+        
                
         this.afterIncludeEndereco();
             

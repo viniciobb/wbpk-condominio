@@ -58,7 +58,8 @@ var EnderecoActions = {
     clickEndereco: function(endereco, index){
         Dispatcher.dispatch({
             actionType: actionTypes.CLICK_ENDERECO,
-            endereco: endereco
+            endereco: endereco,
+            index: index
         });
     },
 

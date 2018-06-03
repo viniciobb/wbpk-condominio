@@ -11,6 +11,7 @@ var _enderecos = []; // outside the export module
 var _initialized = false;
 var _endereco = {};
 var _saved_state = false;
+var _index = 0;
 
 // take an empty object, take the emitEmitter.prototype and 
 // add everything on the last object
@@ -33,6 +34,10 @@ var EnderecoStore = assign({}, EventEmitter.prototype,{
     getEndereco: function(){
         
         return _endereco;
+    },
+
+    getQtdeEndereco: function(){
+        return _qtdeEndereco;
     },
 
     getSavedState: function(){
@@ -98,6 +103,7 @@ Dispatcher.register(function(action){
                 estado: '',
                 id: ''
             };
+            _index=0;
             _saved_state = false;
         break;
 
@@ -122,7 +128,7 @@ Dispatcher.register(function(action){
             break;
         
         case ActionTypes.CREATE_ENDERECO:
-            _enderecos.push(action.endereco);
+            _enderecos[_index]=(action.endereco);
             _endereco = {};
             _saved_state = true;
             EnderecoStore.emitChange();
@@ -155,6 +161,7 @@ Dispatcher.register(function(action){
 
         case ActionTypes.CLICK_ENDERECO:
             _endereco = action.endereco;
+            _index = action.index;
             _saved_state = true;    
             EnderecoStore.emitChange();
         break;
