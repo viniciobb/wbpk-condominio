@@ -17,8 +17,16 @@ class EnderecoList extends React.Component{
        //};
 
        this.deleteEndereco =  this.deleteEndereco.bind(this);
+       this._onClick =  this._onClick.bind(this);
 
      }
+
+     _onClick(endereco, event){
+        event.preventDefault();
+        console.log(endereco);
+        EnderecoActions.clickEndereco(endereco);
+        this.props.history.push("condominio/endereco");
+    }
 
     deleteEndereco(endereco, event){ 
         event.preventDefault();
@@ -36,7 +44,8 @@ class EnderecoList extends React.Component{
                 
                 <tr>
                     <td><a href="#" onClick={this.deleteEndereco.bind(this, endereco)}>Delete</a></td>
-                    <td><Link to={"/condominio/" + this.props.idCondominio +"/endereco/" + index }>{endereco.logradouro}</Link></td>
+                    <td><a href="#" onClick={this._onClick.bind(this, endereco)}>{endereco.logradouro}</a></td>
+                    {/* <td><Link to={"/condominio/" + this.props.idCondominio +"/endereco/" + index }>{endereco.logradouro}</Link></td> */}
                     <td>{endereco.numero}</td>
                     <td>{endereco.bairro}</td>
                     <td>{endereco.cep}</td>

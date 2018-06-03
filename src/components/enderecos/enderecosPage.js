@@ -96,6 +96,7 @@ class EnderecosPage extends React.Component{
                {/* {this.showAddEnderecos() && <Link to={"/condominio/"+this.props.idCondominio+"/endereco"} className="btn btn-default">Adicionar Endereço</Link>} */}
                <EnderecoList 
                     enderecos={this.state.enderecos}
+                    history={this.props.history}
                 />   
             </div>    
         );

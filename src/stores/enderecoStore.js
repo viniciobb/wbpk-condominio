@@ -152,6 +152,12 @@ Dispatcher.register(function(action){
             _saved_state = true;    
             EnderecoStore.emitChange();
         break;
+
+        case ActionTypes.CLICK_ENDERECO:
+            _endereco = action.endereco;
+            _saved_state = true;    
+            EnderecoStore.emitChange();
+        break;
         
         case ActionTypes.DELETE_ENDERECO:
             //_enderecos.push(action.endereco);

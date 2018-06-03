@@ -55,6 +55,13 @@ var EnderecoActions = {
         });
     },
 
+    clickEndereco: function(endereco, index){
+        Dispatcher.dispatch({
+            actionType: actionTypes.CLICK_ENDERECO,
+            endereco: endereco
+        });
+    },
+
     deleteEndereco: function(endereco){
         Dispatcher.dispatch({
             actionType: actionTypes.DELETE_ENDERECO,
