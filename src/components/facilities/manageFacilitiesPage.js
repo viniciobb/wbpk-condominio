@@ -12,6 +12,7 @@ class ManageFacilitiesPage extends React.Component {
         this.state = this.getStateFromStores();
         this.state.errors= {};
         this.state.dirty= false;
+        console.log(this.state);
         // this.state= {
         //     facility: {
         //         nomefacility: '',
@@ -28,7 +29,9 @@ class ManageFacilitiesPage extends React.Component {
         // };
         this.getStateFromStores = this.getStateFromStores.bind(this); 
         this._onChange = this._onChange.bind(this);
-        
+        this.setFacilityState = this.setFacilityState.bind(this);
+        this.facilityFormIsValid = this.facilityFormIsValid.bind(this);
+        this.saveFacility = this.saveFacility.bind(this);
     } 
 
     getStateFromStores() {
@@ -60,19 +63,7 @@ class ManageFacilitiesPage extends React.Component {
     setFacilityState(event){ // called for every key press
         var field = event.target.name;
         var value = event.target.value;
-        
-
-        
-        console.log("field : " + field);
-        console.log("value : " + value);
-
-
         this.state.facility[field] = value;
-
-        console.dir(this.state.facility);
-
-
-        console.log("typed : " + value);
         this.setState({ dirty: true });
         return this.state.facility;
     }
@@ -86,32 +77,34 @@ class ManageFacilitiesPage extends React.Component {
         console.dir(this.state.facility);
         
 
-        if(this.props.params.idFacility){
+        // if(this.props.params.idFacility){
 
-            FacilityActions.updateFacility(this.state.facility, this.props.match.params.idFacility);
+        //     FacilityActions.updateFacility(this.state.facility, this.props.match.params.idFacility);
 
-        }else{
+        // }else{
 
             FacilityActions.createFacility(this.state.facility);
 
-        }
+        //}
                
         
         //console.log(this.props.params.idCondominio);
         //console.log(typeof(this.props.params.idCondominio));
         
-        if(this.props.match.params.idCondominio !== '0' || this.props.match.params.idCondominio !== 0)
+        // if(this.props.match.params.idCondominio !== '0' || this.props.match.params.idCondominio !== 0)
             
-            this.transitionTo('manageCondominio', {id: this.props.match.params.idCondominio});
+        //     this.transitionTo('manageCondominio', {id: this.props.match.params.idCondominio});
             
-        else{
+        // else{
             
-            console.log("******* iḿ going to addFacility");
+        //     console.log("******* iḿ going to addFacility");
             
-            //this.transitionTo('addFacility');
-            this.props.history.push("/addFacility");
+        //     //this.transitionTo('addFacility');
+        //     this.props.history.push("/addFacility");
 
-        }    
+        // } 
+        
+        this.props.history.push("/condominio");
 
     }
 

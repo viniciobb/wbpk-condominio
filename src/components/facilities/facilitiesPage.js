@@ -85,7 +85,7 @@ class FacilitiesPage extends React.Component {
         return (
             <div className="container">
                <h1 className="page-header">Facilities Page</h1>
-               <div><a href="#" onClick={this._onClick}>Adicionar Facility</a></div>}
+               <div><a href="#" onClick={this._onClick}>Adicionar Facility</a></div>
                {/* <Link to="addFacility" params={{idCondominio: this.props.idCondominio}} className="btn btn-default">Adicionar Facility</Link> */}
                <FacilitiesList 
                     facilities={this.state.facilities}
