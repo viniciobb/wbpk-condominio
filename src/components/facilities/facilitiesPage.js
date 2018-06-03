@@ -14,8 +14,17 @@ class FacilitiesPage extends React.Component {
         this.state = this.getStateFromStores(); 
         this.getStateFromStores = this.getStateFromStores.bind(this);
         this._onChange = this._onChange.bind(this);
+        this._onClick = this._onClick.bind(this);
         
-    } 
+    }
+    
+    _onClick(){
+        console.log("_onClick");
+        FacilityActions.clickNewFacility();
+        console.log(this.props.history);
+        this.props.history.push("condominio/facility");   
+        // todo go to manageEndereco     
+    }
 
     getStateFromStores() {
         return {
@@ -76,7 +85,8 @@ class FacilitiesPage extends React.Component {
         return (
             <div className="container">
                <h1 className="page-header">Facilities Page</h1>
-               <Link to="addFacility" params={{idCondominio: this.props.idCondominio}} className="btn btn-default">Adicionar Facility</Link>
+               <div><a href="#" onClick={this._onClick}>Adicionar Facility</a></div>}
+               {/* <Link to="addFacility" params={{idCondominio: this.props.idCondominio}} className="btn btn-default">Adicionar Facility</Link> */}
                <FacilitiesList 
                     facilities={this.state.facilities}
                     idCondominio={this.props.idCondominio}

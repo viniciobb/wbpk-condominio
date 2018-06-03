@@ -9,24 +9,33 @@ class ManageFacilitiesPage extends React.Component {
    
     constructor(props) {
         super(props);
-        this.state= {
-            facility: {
-                nomefacility: '',
-                tempoReserva: '',
-                disponibilidadeDia: '',
-                disponibilidadeHora: '',
-                valor: 0,
-                regrasUso: '',
-                id: ''
+        this.state = this.getStateFromStores();
+        this.state.errors= {};
+        this.state.dirty= false;
+        // this.state= {
+        //     facility: {
+        //         nomefacility: '',
+        //         tempoReserva: '',
+        //         disponibilidadeDia: '',
+        //         disponibilidadeHora: '',
+        //         valor: 0,
+        //         regrasUso: '',
+        //         id: ''
             
-            },
-            errors: {},
-            dirty: false
-        };
-
+        //     },
+        //     errors: {},
+        //     dirty: false
+        // };
+        this.getStateFromStores = this.getStateFromStores.bind(this); 
         this._onChange = this._onChange.bind(this);
         
     } 
+
+    getStateFromStores() {
+        return {
+            facility:   FacilityStore.getFacility()
+        };
+    }
     
     componentWillUnmount(){
         FacilityStore.removeChangeListener(this._onChange);
@@ -39,21 +48,7 @@ class ManageFacilitiesPage extends React.Component {
 
     componentWillMount(){
         
-        FacilityStore.addChangeListener(this._onChange);
-       
-        console.log("componentWillMount managerFacility");
-        console.log(this.props.match.params.idCondominio);
-        console.log(this.props.match.params.idFacility);
-        
-
-        if(this.props.match.params.idFacility){
-            
-          this.setState({facility: FacilityStore.getFacilityById(this.props.match.params.idFacility)});
-
-        }
-        console.log("this.state.facility");
-        console.dir(this.state.facility);
-
+         FacilityStore.addChangeListener(this._onChange);
     }
 
     getTempoReserva(){
@@ -131,7 +126,7 @@ class ManageFacilitiesPage extends React.Component {
         this.setState({errors: this.state.errors});
         return formIsValid;
 
-    },
+    }
 
     
     /**

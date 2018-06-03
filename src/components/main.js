@@ -2,7 +2,8 @@ import React from 'react';
 import Home from './homePage';
 import About from './about/aboutPage';
 import ManageCondominioPage from './condominios/manageCondominioPage';
-import manageEnderecoPage from './enderecos/manageEnderecoPage';
+import ManageEnderecoPage from './enderecos/manageEnderecoPage';
+import ManageFacilitiesPage from './facilities/manageFacilitiesPage';
 import CondominiosPage from './condominios/condominiosPage';
 import CondominioList from './condominios/condominioList';
 
@@ -17,8 +18,9 @@ const Main = () => (
       <Route exact path='/about' component={About}/>
       {/* <Route exact path="/condominio/:id" component={ManageCondominioPage}/> */}
       <Route exact path="/condominio" component={ManageCondominioPage}/>
-      <Route path="/condominio/:idCondominio/endereco/:idEndereco" component={manageEnderecoPage}/>
-      <Route exact path="/condominio/endereco" component={manageEnderecoPage}/>
+      <Route path="/condominio/:idCondominio/endereco/:idEndereco" component={ManageEnderecoPage}/>
+      <Route exact path="/condominio/endereco" component={ManageEnderecoPage}/>
+      <Route exact path="/condominio/facility" component={ManageFacilitiesPage}/>
       <Route exact path="/condominios" component={CondominiosPage}/>
       <Route exact path="/condominioList" component={CondominioList}/>
       <Route component={NotFoundPage}/>

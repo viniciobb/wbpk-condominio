@@ -32,14 +32,6 @@ class FacilityForm extends React.Component {
                     value={this.props.facility.tempoReserva}
                     error={this.props.errors.tempoReserva}
                 />
-
-                <RadioButton
-                    label="Tempo de Reserva"
-                    name="tempoReserva"
-                    onChange={this.props.onChange}
-                    value={this.props.facility.tempoReserva}
-                    error={this.props.errors.tempoReserva}
-                />
                 
                 <Input 
                     label="Disponibilidade Dia"
