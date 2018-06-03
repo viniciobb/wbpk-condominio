@@ -20,7 +20,7 @@ import { BrowserRouter } from 'react-router-dom';
 import InitializeActions from './actions/initializeActions';
 import App from './components/app';
 
-InitializeActions.initApp();
+//InitializeActions.initApp();
 
 render((
     <BrowserRouter>

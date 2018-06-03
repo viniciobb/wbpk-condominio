@@ -7,20 +7,6 @@ var CondominioApi = require("../api/condominioApi");
 
 var InitializeActions = {
     initApp: function(){
-        
-        //var authors = AuthorApi.getAllAuthors();
-        //console.log("response authors :" + authors);
-        
-        // AuthorApi.getAllAuthors().then(function(responseAuthors){
-            
-        //     Dispatcher.dispatch({
-        //         actionType: ActionTypes.INITIALIZE,
-        //         initialData : {
-        //             authors: responseAuthors
-        //         }
-        //     });
-
-        // });
 
         CondominioApi.getAllCondominios().then(function(responseCondominios){
             

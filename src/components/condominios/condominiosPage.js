@@ -34,9 +34,9 @@ class CondominiosPage extends React.Component {
 
         console.log("CondominiosPage componentDidMount");
         
-        this.setState({
-            condominios: CondominioStore.getAllCondominios()
-        });
+        //this.setState({
+        CondominioActions.getAllCondominios();
+        //});
 
     }
     

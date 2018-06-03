@@ -4,6 +4,20 @@ var CondominioApi = require("../api/condominioApi");
 var actionTypes = require("../constants/actionTypes");
 
 var CondominioActions = {
+    
+    getAllCondominios: function(){
+    
+        CondominioApi.getAllCondominios().then(function(responseCondominios){
+            
+            Dispatcher.dispatch({
+                actionType: actionTypes.INITIALIZE_CONDOMINIO,
+                initialData : {
+                    condominios: responseCondominios
+                }
+            });
+
+        });
+    },    
 
     createCondominio: function(condominio, callback){
        
