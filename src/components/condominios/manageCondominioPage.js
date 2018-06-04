@@ -29,9 +29,18 @@ class ManageCondominioPage extends React.Component {
     }
 
     getStateFromStores() {
+        
+        var condominio = CondominioStore.getStateCondominio();
+        var enderecos =  EnderecoStore.getEnderecos();
+        var facilities =  FacilityStore.getFacilities();
+        
+        condominio.enderecos = {};
+        condominio.enderecos = enderecos;
+        condominio.facilities = {};
+        condominio.facilities = facilities;
+        
         return {
-          condominio: CondominioStore.getStateCondominio()
-          //endereco:   EnderecoStore.getEnderecos()
+          condominio: condominio
         };
     }
     

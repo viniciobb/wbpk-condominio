@@ -8,7 +8,7 @@ var CHANGE_EVENT = "change";
 
 var _condominios = []; // outside the export module
 var _condominio= {};
-var _saved_state = false;
+
 
 // take an empty object, take the emitEmitter.prototype and 
 // add everything on the last object
@@ -42,13 +42,13 @@ var CondominioStore = assign({}, EventEmitter.prototype,{
 
     getStateCondominio: function(){
 
-        if(_saved_state){
+        //if(_saved_state){
 
             return _condominio;
 
-        }else{
-            return false;            
-        }
+        //}else{
+            //return false;            
+        //}
     },
    
     
@@ -92,27 +92,28 @@ CondominioStore.dispatchToken = Dispatcher.register(function(action){
     
     if(!action.actionType) return;
     
+    console.log(action.actionType);
+
     switch(action.actionType){
         // this is the part that varies...
+        
         
         case  ActionTypes.INITIALIZE_CONDOMINIO:
             
             if(action.initialData && action.initialData.condominios)
                 _condominios = action.initialData.condominios;
-            CondominioStore.emitChange();
+                _condominio = {};
+                CondominioStore.emitChange();
             break;
         
         case ActionTypes.CREATE_CONDOMINIO:
             _condominios.push(action.condominio);
             _condominio = {};
-            _saved_state = false;
             CondominioStore.emitChange();
         break;
 
         case ActionTypes.CLICK_CONDOMINIO:
             _condominio = action.condominio;
-            console.dir(_condominio);
-            _saved_state = true;
             CondominioStore.emitChange();
         break;
 
@@ -124,19 +125,19 @@ CondominioStore.dispatchToken = Dispatcher.register(function(action){
                     quantidadeBlocos: 0,
                     quantidadeElevadores: 0,
                     quantidadeVagas: 0,
-                    id: 0,
-                    enderecos: [],
-                    facilities: []
+                    id: 0
+                    //enderecos: [],
+                    //facilities: []
             };
-            _saved_state = true;
+
             CondominioStore.emitChange();
+
         break;
 
         case ActionTypes.UPDATE_CONDOMINIO:
             var existingCondominio = _.find(_condominios, {id : action.condominio.id});
             var existingCondominioIndex = _.indexOf(_condominios, existingCondominio);
             _condominio = {};
-            _saved_state = false;
             _condominios.splice(existingCondominioIndex,1,action.condominio);
             CondominioStore.emitChange();
             break;
@@ -150,7 +151,6 @@ CondominioStore.dispatchToken = Dispatcher.register(function(action){
 
         case ActionTypes.SAVE_STATE_CONDOMINIO:
             _condominio = action.condominio;
-            _saved_state = true;
             CondominioStore.emitChange();
             break;        
 
