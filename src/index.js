@@ -12,7 +12,8 @@
 
 "use strict";
 //import 'jquery';
-import 'bootstrap';
+//import 'popper.js';
+//import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { render } from 'react-dom';

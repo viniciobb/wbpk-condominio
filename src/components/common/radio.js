@@ -1,55 +1,83 @@
 "use strict";
 import React from 'react';
+import PropTypes from 'prop-types';
+import {FormGroup, Radio} from 'react-bootstrap';
 
 class RadioButton extends React.Component{
 
-    render(){
+    constructor(props) {
+        super(props);
+        this.clickRadio = this.clickRadio.bind(this);
         
+    }
+
+    clickRadio(radioItem, event){
+        console.log("i was clicked " + radioItem);
+        console.dir(event);
+        //event.target.name = this.props.name;
+        //event.target.value = radioItem;
+        //console.dir(event);
+        
+        // var event = {};
+        // event.target = {};
+
+        // event.target.name = this.props.name;
+        // console.log(" event " + event.target.name);
+        // console.dir(event);
+
+        // event.target.value = radioItem;
+        // console.log(" event " + event.target.value);
+        // console.dir(event);
+
+        //console.log(this.props.onChange);
+        this.props.onChange(radioItem);
+
+    }
+
+    setGender(event) {
+        console.dir(event);
+        console.log(event.target.value);
+        console.log(event.target.name);
+
+    }
+
+    render(){
+
         var wrapperClass = 'form-group';
         if(this.props.error && this.props.error.length > 0){
             wrapperClass += " " + "has-error";
         }
-
-        // var createRadioRow = function(option, index){
-            
-        //     console.dir(option);
-            
-        //     var idFacility = ( option.id ? option.id : index);
-            
-        //     return (
                 
-        //         <label>
-        //             <input type="radio" name="optionsRadios" id="optionsRadios1" value="option" checked>
-        //                 Option one is this and that&mdash;be sure to include why it's great
-        //         </label>
-        //     );
-        // };
+        var createRadioRow = function(radioItem, event){
+            
+            console.log("create Radio row event");
+            console.dir(event);
+            
+            return (
+                
+                <label className="radio-inline">
+                    <input type="radio" value={radioItem} checked={this.props.checked == radioItem} name={this.props.name} />
+                        {radioItem}
+                </label>
+                
+            );
+        };
         
         return (
+
             <div className={wrapperClass}>
                 <label htmlFor={this.props.name}>{this.props.label}</label>
-                <div className="field">
-                    <div className="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                            Option one is this and that&mdash;be sure to include why it's great
-                            </input>
-                        </label>
+                <FormGroup>
+                    <div onChange={this.props.onChange}>
+                        {this.props.value.map(createRadioRow, this)}     
                     </div>
-                    <div className="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                            Option two can be something else and selecting it will deselect option one
-                            </input>
-                        </label>
-                    </div>
-                    <div className="input">{this.props.error}</div>
-                </div>
+                </FormGroup>
             </div>
+
             
         ); 
     }
 
-};
+}
 
 module.exports = RadioButton; 

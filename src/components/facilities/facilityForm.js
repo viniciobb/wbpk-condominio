@@ -6,7 +6,6 @@ import DropDown from "../common/dropDown";
 import RadioButton from "../common/radio";
 import TextAreaInput from "../common/textAreaInput";
 
-
 class FacilityForm extends React.Component {    
         
     render(){
@@ -25,14 +24,16 @@ class FacilityForm extends React.Component {
                     error={this.props.errors.nomefacility}
                 />
                 
-                <Input
-                    label="Tempo de Reserva"
-                    name="tempoReserva"
-                    onChange={this.props.onChange}
-                    value={this.props.facility.tempoReserva}
-                    error={this.props.errors.tempoReserva}
-                />
                 
+                <RadioButton
+                    label="Intervalo de Reserva"
+                    name="tipoIntervaloReserva"
+                    onChange={this.props.onChange}
+                    checked={this.props.facility.tipoIntervaloReserva}
+                    value={this.props.facility.intervaloReserva}
+                    error={this.props.errors.intervaloReserva}
+                />
+
                 <Input 
                     label="Disponibilidade Dia"
                     name="disponibilidadeDia"

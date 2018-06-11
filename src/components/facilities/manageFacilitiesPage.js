@@ -53,20 +53,25 @@ class ManageFacilitiesPage extends React.Component {
         
          FacilityStore.addChangeListener(this._onChange);
     }
-
-    getTempoReserva(){
-
-        return ["Dia", "Hora" ];
-
-    }
+   
         
     setFacilityState(event){ // called for every key press
+        console.log("setFacilityState");
+        console.dir(event);
+        console.log(event.target.value);
+        console.log(event.target.name);
+
         var field = event.target.name;
         var value = event.target.value;
+
         this.state.facility[field] = value;
+        console.dir(this.state.facility);
+
         this.setState({ dirty: true });
         return this.state.facility;
     }
+
+    
     
     saveFacility(event){ 
         event.preventDefault();
@@ -132,7 +137,6 @@ class ManageFacilitiesPage extends React.Component {
             <FacilityForm 
              facility={this.state.facility} 
              onChange={this.setFacilityState}
-             tempoReservaOptions= {this.getTempoReserva()} 
              onSave={this.saveFacility}
              errors={this.state.errors}
             /> 
