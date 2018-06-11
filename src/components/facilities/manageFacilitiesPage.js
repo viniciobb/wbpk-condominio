@@ -32,7 +32,14 @@ class ManageFacilitiesPage extends React.Component {
         this.setFacilityState = this.setFacilityState.bind(this);
         this.facilityFormIsValid = this.facilityFormIsValid.bind(this);
         this.saveFacility = this.saveFacility.bind(this);
+        this.getIntervaloReserva = this.getIntervaloReserva.bind(this);
     } 
+
+    getIntervaloReserva(){
+        
+        return ["Dia" , "Hora"];        
+
+    }
 
     getStateFromStores() {
         return {
@@ -136,6 +143,7 @@ class ManageFacilitiesPage extends React.Component {
         return (
             <FacilityForm 
              facility={this.state.facility} 
+             intervaloReserva={this.getIntervaloReserva()}
              onChange={this.setFacilityState}
              onSave={this.saveFacility}
              errors={this.state.errors}

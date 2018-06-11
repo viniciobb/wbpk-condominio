@@ -105,7 +105,6 @@ Dispatcher.register(function(action){
             console.log("CLICK_NEW_FACILITY");
             _facility = {
                 nomefacility: '',
-                intervaloReserva: ["Hora", "Dia"],
                 tipoIntervaloReserva: "",
                 disponibilidadeDia: '',
                 disponibilidadeHora: '',

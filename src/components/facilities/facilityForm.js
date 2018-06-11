@@ -30,7 +30,7 @@ class FacilityForm extends React.Component {
                     name="tipoIntervaloReserva"
                     onChange={this.props.onChange}
                     checked={this.props.facility.tipoIntervaloReserva}
-                    value={this.props.facility.intervaloReserva}
+                    value={this.props.intervaloReserva}
                     error={this.props.errors.intervaloReserva}
                 />
 
