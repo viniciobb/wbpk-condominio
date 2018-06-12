@@ -5,6 +5,11 @@ import Input from "../common/textInput";
 import DropDown from "../common/dropDown";
 import RadioButton from "../common/radio";
 import TextAreaInput from "../common/textAreaInput";
+import ReactBootstrapSlider from 'react-bootstrap-slider';
+import 'rc-slider/assets/index.css';
+import 'rc-tooltip/assets/bootstrap.css';
+import Slider from 'rc-slider';
+const Range = Slider.Range;
 
 class FacilityForm extends React.Component {    
         
@@ -13,8 +18,10 @@ class FacilityForm extends React.Component {
            
            <form className="container">
                 
-                <h1 className="page-header">Formulário Facility</h1>   
-             
+                <h1 className="page-header">Formulário Facility</h1>
+
+                <Slider min={0} max={20} defaultValue={3}/>
+                <Range min={0} max={20} defaultValue={[3, 10]} tipFormatter={value => `${value}%`} />
 
                 <Input 
                     label="Nome"

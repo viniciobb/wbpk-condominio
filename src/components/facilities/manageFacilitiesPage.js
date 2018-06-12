@@ -37,7 +37,7 @@ class ManageFacilitiesPage extends React.Component {
 
     getIntervaloReserva(){
         
-        return ["Dia" , "Hora"];        
+        return ["Dias" , "Horas"];        
 
     }
 
